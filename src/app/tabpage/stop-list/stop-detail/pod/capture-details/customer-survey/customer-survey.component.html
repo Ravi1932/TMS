@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Customer Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form class="basic-container" [formGroup]="questionForm">
+    <div *ngFor="let question of getQuestionAnswerFormArrayControls(); let i = index">
+      <div class="pb-0 p-20">
+        <ion-row class="mt-1  ion-align-items-center">
+          <ion-col size="12">
+            <h5 class="fs-16">{{getQuestion(i)}}</h5>
+            <ng-select placeholder="-Select-" [formControl]="getAnswerFormControl(question)">
+              <ng-option *ngFor="let item of answerList;let i = index;" [value]="i+1">{{item.LANMES_0}}</ng-option>
+            </ng-select>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-button color="success" expand="block" (click)="Confirm()">
+      <b> {{'STOP.CONFIRM'| translate}}</b>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

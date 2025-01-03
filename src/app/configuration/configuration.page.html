@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start" class="back-btn">
+      <ion-back-button color="light" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'CONFIGURATION.LBL_CONFIG' |translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-vertical">
+  <div class="form-section mb-5">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <ion-grid class="ion-no-padding">
+          <form #configurationForm="ngForm" novalidate class="px-4" (ngSubmit)="onSubmit(configurationForm)">
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked">{{'CONFIGURATION.X3_POD_IP' |translate}}</ion-label>
+              <ion-input name="podip" placeholder="Enter X3 POD IP" type="text" [(ngModel)]="configurationModel.pod_ip"
+                #pod_ip="ngModel" required>
+              </ion-input>
+            </ion-item>
+            <ion-text *ngIf="submitted && pod_ip.invalid">
+              <p class="error-msg" *ngIf="pod_ip.invalid && pod_ip.errors.required">
+                {{'CONFIGURATION.X3_POP_REQ' |translate}}
+              </p>
+            </ion-text>
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked">{{'CONFIGURATION.X3_PORT' |translate}}</ion-label>
+              <ion-input name="port" placeholder="Enter X3 Port" type="text" [(ngModel)]="configurationModel.port"
+                #port="ngModel" required>
+              </ion-input>
+            </ion-item>
+            <ion-text *ngIf="submitted && port.invalid">
+              <p class="error-msg" *ngIf="port.invalid && port.errors.required">
+                {{'CONFIGURATION.X3_PORT_REQ' |translate}}
+              </p>
+            </ion-text>
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked"> {{'CONFIGURATION.POOL_ALIAS' |translate}}</ion-label>
+              <ion-input name="pool_alias" placeholder="Enter Pool Alias" type="text"
+                [(ngModel)]="configurationModel.pool_alias" #pool_alias="ngModel" required>
+              </ion-input>
+            </ion-item>
+            <ion-text *ngIf="submitted && pool_alias.invalid">
+              <p class="error-msg" *ngIf="pool_alias.invalid && pool_alias.errors.required">
+                {{'CONFIGURATION.POOL_REQ' |translate}}
+              </p>
+            </ion-text>
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked"> {{'CONFIGURATION.FOLDER_UNAME' |translate}}</ion-label>
+              <ion-input name="folder_username" placeholder="Enter Folder Username" type="text"
+                [(ngModel)]="configurationModel.folder_username" #folder_username="ngModel" required>
+              </ion-input>
+            </ion-item>
+            <ion-text *ngIf="submitted && folder_username.invalid">
+              <p class="error-msg" *ngIf="folder_username.invalid && folder_username.errors.required">
+                {{'CONFIGURATION.FOLDER_UNAME_REQ' |translate}}
+              </p>
+            </ion-text>
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked"> {{'CONFIGURATION.FOLDER_PSW' |translate}}</ion-label>
+              <ion-input name="folder_password" placeholder="Enter Folder Password" type="password"
+                [(ngModel)]="configurationModel.folder_password" #folder_password="ngModel" required>
+              </ion-input>
+            </ion-item>
+            <ion-text *ngIf="submitted && folder_password.invalid">
+              <p class="error-msg" *ngIf="folder_password.invalid && folder_password.errors.required">
+                {{'CONFIGURATION.FOLDER_PSW_REQ' |translate}}
+              </p>
+            </ion-text>
+            <ion-row>
+              <ion-col size="6" class="pr-1">
+                <ion-button color="danger" shape="round" expand="block" class="ion-margin-vertical" type="reset">
+                  {{'CONFIGURATION.RESET' |translate}}
+                </ion-button>
+              </ion-col>
+              <ion-col size="6" class="pl-1">
+                <ion-button shape="round" expand="block" class="ion-margin-vertical" type="submit">
+                  {{'CONFIGURATION.SUBMIT' |translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

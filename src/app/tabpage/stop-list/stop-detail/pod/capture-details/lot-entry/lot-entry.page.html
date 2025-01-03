@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>{{ 'LOT_ENTRY.LOT_ENTRY' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="tertiary">
+  <form [formGroup]="lotEntryForm">
+    <ion-item lines="none">
+      <ion-input formControlName="lot_entry" placeholder="{{'LOT_ENTRY.ENTER_LOT_NUMBER'| translate}}" name="lot_entry"
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-text *ngIf="isLotEntryFormSubmitted && lotEntryForm.get('lot_entry').invalid">
+      <p class="error-msg" *ngIf="lotEntryForm.get('lot_entry').invalid && lotEntryForm.get('lot_entry').errors.required">
+        {{ 'LOT_ENTRY.LOT_ENTRY_REQUIRED' | translate }}
+      </p>
+    </ion-text>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-button color="success" expand="block" (click)="submit()">
+      <b> {{'LOT_ENTRY.SUBMIT'| translate}}</b>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

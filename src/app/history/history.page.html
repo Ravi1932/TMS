@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/routes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Archived</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-searchbar (ionChange)="searchDocument($event)" debounce="500"></ion-searchbar>
+  <ion-card [routerLink]="['/stop-detail']" [queryParams]="{stop: item.SDHNUM_0, from: 'history'}"
+    *ngFor="let item of filteredDocuments">
+    <ion-card-header class="p-8" color="dark">
+      <ion-row>
+        <ion-col size="8" class="d-v-center">
+          <ion-card-subtitle>{{ item.DLVDAT_0 | date:'mediumDate' }}</ion-card-subtitle>
+          <ion-text>
+            <h6 class="mb-0">{{ item.SDHNUM_0 }}</h6>
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-chip color="warning">
+            <ion-label>{{ item.LANMES_0 === 'Delivered' ? 'Completed' : item.LANMES_0 }}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content class="py-8">
+      <ion-label>
+        <p class="my-8 text-dark"><b>Route:</b> {{ item.XDRN_0 }}</p>
+        <p class="my-8 text-dark"><b>Site:</b> {{ item.STOFCY_0 }}</p>
+        <p class="my-8 text-dark"><b>Customer:</b> {{ item.BPCORD_0 }}</p>
+        <p class="my-8 text-dark"><b>Name:</b> {{ item.BPDNAM_0 }}</p>
+        <p class="my-8 text-dark"><b>City:</b> {{ item.BPDCTY_0 }}</p>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

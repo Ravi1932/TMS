@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="d-flex ion-align-items-center" (click)="goTo('/tabs/route-settlement/stock')">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{'ROUTE_SETTLEMENT.OPENING_STOCK'| translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngFor="let item of [0,1,2,3,4]">
+    <ion-card class="invoice_border">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="fs-16 fw-400" color="primary">{{ 'ROUTE_SETTLEMENT.VEHICLE_CODE'| translate }} :</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="fs-16"> DEF02256897410200</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="m-0">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="fs-16 fw-400" color="primary">{{ 'ROUTE_SETTLEMENT.VEHICLE_DES'| translate }} :</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="fs-16"> neno</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="my-0">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="fs-16 fw-400" color="primary">{{ 'ROUTE_SETTLEMENT.PRODUCT_CODE'| translate }} :</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="fs-16"> GIH004562</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="my-0">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="fs-16 fw-400" color="primary">{{ 'ROUTE_SETTLEMENT.PRODUCT_DES'| translate }} :</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="fs-16"> coco-cola</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="my-0">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="fs-16 fw-400" color="primary">{{ 'STOP.UOM'| translate }} :</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="fs-16">25</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="my-0">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="fs-16 fw-400" color="primary">{{ 'STOP.QTY_SHORT'| translate }} :</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-text class="fs-16">30</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr class="my-0">
+    </ion-card>
+  </ng-container>
+</ion-content>

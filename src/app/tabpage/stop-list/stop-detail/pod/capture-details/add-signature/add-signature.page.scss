@@ -1,0 +1,32 @@
+canvas {
+    border: 1px dashed gray;
+    width: 100%;
+}
+
+.star-rating {
+    font-size: 0;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 35px;
+    cursor: pointer;
+    color: #ffcc00;
+
+}
+
+.star-rating label:before {
+    content: '\2605';
+}
+
+.star-rating input:checked~label {
+    color: #ddd;
+
+}
+
+.star-rating input:checked~label:before {
+    content: '\2605';
+}

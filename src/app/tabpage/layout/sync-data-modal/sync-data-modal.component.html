@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Sync Data</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="fw-900 fs-20 ion-justify-content-center d-flex p-20">
+    <ion-text>Please Sync latest Data from Server</ion-text>
+  </div>
+  <ion-button class="mw-90" expand="block" (click)="onSync()">SYNC NOW</ion-button>
+</ion-content>

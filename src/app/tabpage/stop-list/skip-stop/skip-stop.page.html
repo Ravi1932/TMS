@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="header-title">{{ cus_name }} - {{ docNo }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="tertiary">
+  <form #skipstopForm="ngForm" novalidate (ngSubmit)="onSubmit(skipstopForm)">
+    <ion-row>
+      <ion-col>
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.CHOOSE_REASON'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full">
+          <ion-label [hidden]="skipstopModel.reason">{{'STOP.SELECT_REASON'| translate}}</ion-label>
+          <ion-select [ngClass]="{'full-width': skipstopModel.reason}" name="reason" value="brown" okText="Okay"
+            cancelText="Dismiss" [(ngModel)]="skipstopModel.reason" #reason="ngModel" required>
+            <ion-select-option *ngFor="let item of skipReasons" [value]="item.IDENT2_0">{{ item.TEXTE_0 }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-text *ngIf="submitted && reason.invalid">
+          <p class="error-msg" *ngIf="reason.invalid && reason.errors.required">
+            {{'STOP.SELECT_REASON_MSG'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.SKIP_STOP'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full">
+          <ion-textarea name="comment" placeholder="Enter here..." rows="4" [(ngModel)]="skipstopModel.comment"
+            #comment="ngModel" required></ion-textarea>
+        </ion-item>
+        <ion-text *ngIf="submitted && comment.invalid">
+          <p class="error-msg" *ngIf="comment.invalid && comment.errors.required">
+            {{'STOP.REASON_SKIP'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-button type="submit" color="warning" expand="block" shape="round" class="mt-3">
+      {{'STOP.BTN_SKIP_STOP'| translate}}
+    </ion-button>
+  </form>
+</ion-content>

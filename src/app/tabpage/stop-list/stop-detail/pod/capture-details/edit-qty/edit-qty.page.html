@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title> {{'STOP.EDIT_QTY'| translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- <form #qtyForm="ngForm" novalidate class="px-4">
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Quantity</ion-label>
+      <ion-input [(ngModel)]="stopQty.qty" placeholder="Enter Quantity" name="qty" type="number" min="1" max="10"
+        #qty="ngModel" [value]="stopQty.qty" required>
+      </ion-input>
+    </ion-item>
+    {{ qty.errors }}
+    <ion-text *ngIf="submitted && qty.invalid">
+      <p class="error-msg" *ngIf="qty.invalid && qty.errors.required">
+        Password is required.
+      </p>
+    </ion-text>
+    <ion-text *ngIf="submitted && qty.touched || qty.invalid">
+      <p class="error-msg" *ngIf="qty.invalid && qty.errors?.max">
+        Please enter 4 character long password.
+      </p>
+    </ion-text> -->
+  <!-- <ion-button shape="round" expand="block" class="my-4" type="submit">Save</ion-button> -->
+  <!-- </form> -->
+  <form [formGroup]="qtyForm" #qtyVar="ngForm" class="px-4" (ngSubmit)="save()">
+    <ion-item class="ion-no-padding">
+      <ion-label position="stacked">{{'STOP.QTY'| translate}}</ion-label>
+      <ion-input formControlName="qty" placeholder="{{'STOP.QTY_PLACE'| translate}}" name="qty" type="number"></ion-input>
+    </ion-item>
+    <ion-text *ngIf="qtyVar.submitted && qtyForm.controls.qty.invalid">
+      <p class="error-msg" *ngIf="qtyForm.controls.qty.invalid && qtyForm.controls.qty.errors.required">
+        {{'STOP.QTY_REQ'| translate}}
+      </p>
+    </ion-text>
+    <ion-text *ngIf="qtyVar.submitted && qtyForm.controls.qty.invalid || qtyForm.controls.qty.dirty">
+      <p class="error-msg" *ngIf="qtyForm.controls.qty.errors?.max">
+        {{'STOP.MAX_QTY'| translate}} {{ maxLength }}.
+      </p>
+      <p class="error-msg" *ngIf="qtyForm.controls.qty.errors?.min">
+        {{'STOP.MAX_QTY'| translate}} 1.
+      </p>
+    </ion-text>
+    <ion-button class="mt-10 w-100" type="submit" color="success" expand="block">{{'STOP.BTN_SAVE'| translate}}
+    </ion-button>
+  </form>
+</ion-content>

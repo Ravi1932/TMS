@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Service Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="ion-padding">
+  <form [formGroup]="requestForm" (ngSubmit)="onCreateRequest()">
+    <ion-card class="m-8">
+      <ion-card-header color="medium" class="py-8">
+        <ion-card-title class="fs-16">Home</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Site</ion-label>
+          <ion-input type="text" formControlName="site"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Customer</ion-label>
+          <ion-input type="text" formControlName="customer"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Date</ion-label>
+          <ion-datetime formControlName="date" displayFormat="MM-DD-YYYY" placeholder="Select Date"></ion-datetime>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Time</ion-label>
+          <ion-datetime formControlName="time" displayFormat="HH:mm" placeholder="Select Time"></ion-datetime>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="m-8 mt-24">
+      <ion-card-header color="medium" class="py-8">
+        <ion-card-title class="fs-16">Description</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Address</ion-label>
+          <ion-input type="text" formControlName="address"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">City</ion-label>
+          <ion-input type="text" formControlName="city"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Zip Code</ion-label>
+          <ion-input type="text" formControlName="zipcode"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="m-8 mt-24">
+      <ion-card-header color="medium" class="py-8">
+        <ion-card-title class="fs-16">Base</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Base</ion-label>
+          <ion-input type="text" formControlName="base"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Product</ion-label>
+          <ion-input type="text" formControlName="basePro"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Quantity</ion-label>
+          <ion-input type="text" formControlName="qty"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Skill</ion-label>
+          <ion-input type="text" formControlName="skill"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="m-8 mt-24">
+      <ion-card-header color="medium" class="py-8">
+        <ion-card-title class="fs-16">Management</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Employee Code</ion-label>
+          <ion-input type="text" formControlName="empcode"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="stacked">Requested Resolution Date</ion-label>
+          <ion-datetime formControlName="resdate" displayFormat="MM-DD-YYYY" placeholder="Select Date"></ion-datetime>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="m-8 mt-24">
+      <ion-card-header color="medium" class="py-8">
+        <ion-card-title class="fs-16">Consumptions</ion-card-title>
+      </ion-card-header>
+      <ion-card-content formArrayName="products" class="ion-no-padding">
+        <ng-container *ngFor="let product of productForm.controls; let i = index; let last = last;" [formGroupName]="i">
+          <ion-card>
+            <ion-card-content class="consumption">
+              <ion-button (click)="removeProduct(i)" color="danger" fill="clear" class="remove-button" *ngIf="!last">
+                <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+              </ion-button>
+              <ion-item class="ion-no-padding">
+                <ion-label position="stacked">Consumption Type</ion-label>
+                <ion-input type="text" formControlName="type"></ion-input>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label position="stacked">Consumption</ion-label>
+                <ion-input type="text" formControlName="consumption"></ion-input>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label position="stacked">Quantity</ion-label>
+                <ion-input type="text" formControlName="qty"></ion-input>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label position="stacked">Unit</ion-label>
+                <ion-input type="text" formControlName="unit"></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+          <div class="ion-margin-bottom ion-text-center" *ngIf="last">
+            <ion-button (click)="addNewProduct()" fill="outline" size="small">
+              <ion-icon slot="start" name="add"></ion-icon>
+              Add More Consumption
+            </ion-button>
+          </div>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+    <ion-button type="submit" expand="block" class="mt-24">
+      Create Request
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,7 @@
+<ion-list>
+  <ion-item button (click)="showPreview()">{{ 'COMMON.PREVIEW_OR_EMAIL' | translate }}</ion-item>
+  <ion-item button *ngIf="status !== 5 && status !== 6" (click)="skipStop()">{{ 'STOP.SKIP' | translate }}</ion-item>
+  <ion-item button *ngIf="status !== 6" (click)="cancelStop()">{{ 'COMMON.CANCEL' | translate }}</ion-item>
+  <ion-item button *ngIf="status !== 6" (click)="rescheduleStop()">{{ 'COMMON.RESCHEDULE' | translate }}</ion-item>
+  <!-- <ion-item button>Reschedule</ion-item> -->
+</ion-list>

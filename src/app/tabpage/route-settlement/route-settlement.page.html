@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="d-flex ion-align-items-center" (click)="goTo('/tabs/layout')">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{'ROUTE_SETTLEMENT.ROUTE_SETTLEMENT'| translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row  class="p-20">
+    <ion-col size="6">
+      <ion-card class="m-0 h-150" (click)="goTo('/tabs/route-settlement/stock')" >
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/truck.png" width="50px" class="ion-margin-bottom"> 
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/truck_dark.png" width="50px" class="ion-margin-bottom"> 
+          </div>
+          <ion-text>
+            <h2><b class="fw-900 fs-18">
+                {{'ROUTE_SETTLEMENT.TRUCK_DETAIL'|translate}}</b></h2>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card class="m-0 h-150" >
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/pay.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/pay_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <ion-text>
+            <h2><b class="fw-900 fs-18">
+                {{'ROUTE_SETTLEMENT.PAYMENT_COLLECTED'|translate}}</b></h2>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

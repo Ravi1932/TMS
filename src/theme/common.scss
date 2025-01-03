@@ -1,0 +1,295 @@
+.w-100 {
+  width: 100%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-205 {
+  width: 256px;
+}
+
+.ls-2 {
+  letter-spacing: 2px;
+}
+
+.h-18 {
+  height: 18px !important;
+}
+
+.h-20 {
+  height: 20px !important;
+  width: 20px !important;
+}
+
+.h-25 {
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.h-11 {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.fs-16 {
+  font-size: 16px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
+}
+
+.fs-20 {
+  font-size: 20px !important;
+}
+
+.fs-22 {
+  font-size: 22px !important;
+}
+
+.fs-24 {
+  font-size: 24px !important;
+}
+
+.fs-26 {
+  font-size: 26px !important;
+}
+
+.fs-28 {
+  font-size: 28px !important;
+}
+
+.fs-32 {
+  font-size: 32px !important;
+}
+
+.fs-35 {
+  font-size: 35px !important;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-900 {
+  font-weight: 900;
+}
+
+.p-5 {
+  padding: 5px !important;
+}
+
+.p-8 {
+  padding: 8px !important;
+}
+
+.p-10 {
+  padding: 10px !important;
+}
+
+.p-20 {
+  padding: 20px !important;
+}
+
+.pt-0 {
+  padding-top: 0px;
+}
+
+.pt-4 {
+  padding-top: 4px !important;
+}
+
+.pt-5 {
+  padding-top: 5px;
+}
+
+.pb-5 {
+  padding-bottom: 5px;
+}
+
+.pb-0 {
+  padding-bottom: 0px;
+}
+
+.pt-8 {
+  padding-top: 8px;
+}
+
+.py-8 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.pr-5 {
+  padding-right: 5px !important;
+}
+
+.pr-20 {
+  padding-right: 20px !important;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.px-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.pl-0 {
+  padding-left: 0px !important;
+}
+
+.m-5 {
+  margin: 5px !important;
+}
+
+.my-8 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.m-8 {
+  margin: 8px !important;
+}
+
+.mt-24 {
+  margin-top: 24px !important;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+
+.ml-0 {
+  margin-left: 0px;
+}
+
+.ml-15 {
+  margin-left: 15px !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+
+.m-0 {
+  margin: 0px !important;
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.text-primary {
+  color: var(--ion-color-primary) !important;
+}
+
+.text-black {
+  color: black;
+}
+
+.no-border {
+  border-width: 0 !important;
+  --border-width: 0 !important;
+}
+
+.error-msg {
+  color: #ff5757;
+  position: relative;
+  margin: 0;
+  font-size: 14px;
+  padding-top: 3px;
+}
+
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d-flex-top {
+  display: flex;
+  align-items: flex-start;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
+}
+
+.bg-transparent {
+  background: transparent !important;
+  --background: transparent !important;
+}
+
+.mandatory-btn {
+  position: absolute;
+  color: red;
+  font-size: 30px;
+  // top: 51px;
+  right: 5px;
+}
+
+.word-wrap-normal {
+  word-wrap: normal;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.white-space-normal {
+  white-space: normal !important;
+}
+
+.white-space-nowrap {
+  white-space: nowrap !important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 40px !important;
+}
+
+.ng-select .ng-select-container {
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  min-height: 36px !important;
+  align-items: center;
+  border: 1px solid black !important;
+}
+
+.native-input.sc-ion-input-ios:invalid {
+  padding: 0px !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

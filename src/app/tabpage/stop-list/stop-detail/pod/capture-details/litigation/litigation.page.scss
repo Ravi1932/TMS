@@ -1,0 +1,22 @@
+.top--12px {
+  top: -12px !important;
+}
+
+.camimg-view {
+  max-height: 230px;
+  min-height: 200px;
+  max-width: 200px;
+  min-width: 150px;
+}
+
+.remove-image {
+  position: absolute;
+  right: 5px;
+}
+
+img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  image-rendering: -webkit-optimize-contrast;
+}

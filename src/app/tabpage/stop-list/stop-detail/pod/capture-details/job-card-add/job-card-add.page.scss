@@ -1,0 +1,33 @@
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.timer {
+    font-size: 2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.input-border {
+    border: none;
+}
+
+.man {
+    pointer-events: none;
+}
+
+.text_area {
+    .textarea-wrapper {
+        .native-textarea {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .input-border{
+      background-color: #273143 !important;
+    }
+  }
+

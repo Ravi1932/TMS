@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{'STOP.POD_REPORT'| translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <ion-row>
+    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-card class="m-3 h-100">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th class="text-muted">{{'STOP.POD_REF'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XPODREF_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.SHIP_ID'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XDOCNUM_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.SHIP_DATE'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XSHIDAT_0 | date: 'dd-MM-YYYY' }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.DELIVERY_DATE'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XDLVDAT_0 | date: 'dd-MM-YYYY' }}</td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-card class="m-3 h-100">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th class="text-muted">{{'STOP.SITE'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XSALFCY_0 }},{{ podReportDetails[0]?.FCYNAM_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.SITE_ADDR'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.BPAADDLIG_0 }}
+                <p class="fs-12">
+                  {{ (podReportDetails[0]?.BPAADDLIG_1_0== " ")? '' : podReportDetails[0]?.BPAADDLIG_1_0+',' }}
+                  {{ (podReportDetails[0]?.BPAADDLIG_2_0== " ")? '': podReportDetails[0]?.BPAADDLIG_2_0 }}
+                </p>
+                {{ podReportDetails[0]?.CTY_0 }},{{ podReportDetails[0]?.SAT_0 }},{{ podReportDetails[0]?.POSCOD_0 }}
+              </td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.CARRIER'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.BPTNUM_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.CARRIER_DESC'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XBPTNAM_0}}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.CARRIER_CONTACT'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XTEL_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.CARRIER_EMAIL'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XWEB_0 }}</td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-card class="m-3 h-100">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th class="text-muted">{{'STOP.CUSTOMER'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XBPCORD_0 }}, {{ podReportDetails[0]?.XBPNAME_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.CUSTOMER_ADDR'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.XBPAADDLIG_0 }}
+                <p class="fs-12">
+                  {{ (podReportDetails[0]?.XBPAADDLIG_1_0== " ")? '': podReportDetails[0]?.XBPAADDLIG_1_0+',' }}
+                  {{ (podReportDetails[0]?.XBPAADDLIG_2_0== " ")? '': podReportDetails[0]?.XBPAADDLIG_2_0 }} <br>
+                </p>
+                {{ podReportDetails[0]?.XCTY_0 }},{{ podReportDetails[0]?.XPOSCOD_0 }} <br>
+                {{ podReportDetails[0]?.XCRY_0 }}
+              </td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-card class="m-3 h-100">
+        <ion-card-content class="p-0">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <thead class="thead-dark">
+              <tr>
+                <th class="align-middle pl-2">{{'STOP.PRODUCT_DESC'| translate}}</th>
+                <th class="align-middle">{{'STOP.ORIGINAL_QTY'| translate}}</th>
+                <th class="align-middle">{{'STOP.DELIVERED_QTY'| translate}}</th>
+                <th class="align-middle pr-2">{{'STOP.UNITS'| translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of podReportDetails">
+                <td class="align-middle pl-2">
+                  <span>{{ item.ITMREF_0 }} <br> {{ item.DES_0 }}</span>
+                </td>
+                <td class="align-middle">{{ item.QTY_0 }}</td>
+                <td class="align-middle">{{ item.QTY_0 }}</td>
+                <td class="align-middle pr-2">{{ item.SAU_0 }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-card class="m-3 h-100">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th class="text-muted">{{'STOP.NET_WEIGHT'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.DSPTOTWEI_0 }} {{ podReportDetails[0]?.DSPWEU_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.GROSS_WEIGHT'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.DSPTOTWEI_0 }} {{ podReportDetails[0]?.DSPWEU_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.VOLUME'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.DSPTOTVOL_0 }} {{ podReportDetails[0]?.DSPVOU_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.TOTAL_ORIGINAL_QTY'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.DSPTOTQTY_0 }} {{ podReportDetails[0]?.SAU_0 }}</td>
+            </tr>
+            <tr>
+              <th class="text-muted">{{'STOP.TOTAL_DELIVERY_QTY'| translate}}:</th>
+              <td width="58%">{{ podReportDetails[0]?.DSPTOTQTY_0 }} {{ podReportDetails[0]?.SAU_0 }}</td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+      <ion-card class="m-3">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th class="text-muted">{{'STOP.DRIVER'| translate}}</th>
+              <td width="58%">{{ podReportDetails[0]?.DRIVER_0 }} {{ podReportDetails[0]?.XDRIVERN_0 }}</td>
+            </tr>
+            <!-- <tr>
+              <th class="text-muted">Vehicle ID:</th>
+              <td width="58%">AU011-01 TFG 569</td>
+            </tr>
+            <tr>
+              <th class="text-muted">Signature Name:</th>
+              <td width="58%">Bharath</td>
+            </tr>
+            <tr>
+              <th class="text-muted">Signature:</th>
+              <td width="58%"></td>
+            </tr> -->
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-button color="success" expand="block" (click)="sendMail()">
+      <b>{{'STOP.SEND_MAIL'| translate}}</b>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,168 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="d-flex ion-align-items-center" (click)="onClick()">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <!-- <ion-buttons slot="start" (click)="onClick()">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> -->
+    <ion-title *ngIf="serviceRequestNo">{{'SCHEDULED.SPOT_SERVICE'| translate}}</ion-title>
+    <ion-title *ngIf="!serviceRequestNo">{{'SCHEDULED.SCHEDULED_SERVICE'| translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="p-3">
+    <form [formGroup]="scheduledForm">
+      <div class="mt-2">
+        <ion-label position="stacked">{{'ADMIN.SITE'| translate}} <ion-text color="danger">*</ion-text></ion-label>
+        <ng-select formControlName="site" placeholder="Select site" (change)="changeLeagueOwner('site')">
+          <ng-option *ngFor="let item of siteList" [value]="item">{{
+            item.SiteCode }} - {{ item.SiteName }}</ng-option>
+        </ng-select>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked">{{'STOP.CUSTOMER'| translate}} <ion-text color="danger">*</ion-text></ion-label>
+        <ng-select formControlName="customer" placeholder="Select customer" (change)="changeLeagueOwner('customer')">
+          <ng-option *ngFor="let item of customerList" [value]="item">{{
+            item.CustomerCode }} - {{ item.CustomerName }}</ng-option>
+        </ng-select>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked">{{'ADMIN.ADDRESS'| translate}} <ion-text color="danger">*</ion-text></ion-label>
+        <ng-select formControlName="address" placeholder="Select address" [disabled]="isDisabled"
+          [readonly]="isDisabled">
+          <ng-option *ngFor="let item of addressList" [value]="item">{{
+            item.AddressCodes }} - {{ item.AddressName }}</ng-option>
+        </ng-select>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked">{{'DASHBOARD.TECHNICIAN'| translate}} <ion-text
+            color="danger">*</ion-text></ion-label>
+        <ion-item class="ion-no-padding">
+          <ion-input formControlName="technician" type="text" [value]="driverId" required [disabled]="true">
+          </ion-input>
+        </ion-item>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked">{{'STOP.DATE'| translate}} <ion-text color="danger">*</ion-text></ion-label>
+        <ion-item class="ion-no-padding">
+          <ion-input *ngIf="serviceRequestNo" formControlName="date" type="date" required [disabled]="true">
+          </ion-input>
+          <ion-input *ngIf="!serviceRequestNo" formControlName="date" type="date" required [min]="minDate">
+          </ion-input>
+        </ion-item>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked">{{'SCHEDULED.TIME'| translate}} <ion-text color="danger">*</ion-text></ion-label>
+        <ion-item class="ion-no-padding">
+          <ion-input *ngIf="serviceRequestNo" formControlName="time" type="time" required [disabled]="true">
+          </ion-input>
+          <ion-input *ngIf="!serviceRequestNo" formControlName="time" type="time" required>
+          </ion-input>
+        </ion-item>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked">{{'SCHEDULED.REFERENCE'| translate}} <ion-text
+          color="danger">*</ion-text></ion-label>
+        <ion-item class="ion-no-padding">
+          <ion-input formControlName="reference" type="text" required>
+          </ion-input>
+        </ion-item>
+      </div>
+      <div class="mt-2">
+        <ion-label position="stacked" *ngIf="serviceRequestNo">{{'COMMON.ROUTE_ID'| translate}} <ion-text
+            color="danger">*</ion-text></ion-label>
+        <ion-item class="ion-no-padding" *ngIf="serviceRequestNo">
+          <ion-input formControlName="routeId" type="text" required [disabled]="true">
+          </ion-input>
+        </ion-item>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-6">
+        <h5 class="fs-20 fw-900 mt-4">{{'SCHEDULED.INSTALLED_BASE'| translate}}</h5>
+      </div>
+      <div class="col-6">
+        <div class="ion-text-end ion-padding-top">
+          <ion-button (click)="addInstallBaseFormGroup()">
+            <!-- <ion-icon name="add-circle-outline"></ion-icon> -->
+            <img
+              [src]="'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAICSURBVEiJrZU7T1RhEIaf77C94K0gCzGxodBKg4EQpTYmFKAmGv0DXn6OiR2wgL2JhXbgZS20URMjqBXGGFcxtCw8FjubrHDO7gGZ8pv3fWfmy1wSXUytAlPAFeAUMARkQAN4BywDSymlb9108oSH1Tm1acsa6lO1pi6qy+rP8DXjvVpW/Lr6R91WF9RxNeXg+tRJdSmwm+pML/H76o66po7uo+JRdTW494pAMwF4qR4pwKS8asI3oNZD49puZzVK/KT2d8m0ps538fdH9RvqcKdjIf7xfBE5cHW13gMzGlqzndk31aVuxLIBArcYmtUMuAH0AQ97EfdhD0JzKgMu0RqcF4cY4BXwG7icAWeBDyml7cNSTykJvAVOV4DjwPO2M9qwBozkcEcC8ybH9xG4HeIAP4CxDGgCO7vA8v9WAVIF+A6cbL9GBrfyGO0OSimNlQgwCDQy4AtwrmhCD2JqBTgDvM+AJ8AxYPywAgATwFFguXPQFktkVnbQHqlb6mD7YTbGu+sGLbkqLoTWXOfjUCyotR7Lbv4f4l7/QGhs7jlA6tVYtfWiICXW9evQmC7K4G4AVg9wcD4H904v8HSUuB3ncFLtK6hmouNkbvQ8mR3kavz3Vhz2hroSa7imPlN/ha8ZTZJ79LsOV7TZTeAiraV4gtZaWQe+0pqhxyml9SKNvwqXL+k0p9tZAAAAAElFTkSuQmCC'"
+              alt="">
+          </ion-button>
+        </div>
+      </div>
+    </div>
+    <form class="basic-container" [formGroup]="installBaseForm">
+      <div class="ion-margin-top">
+        <div *ngFor="let email of getFormArrayControls(); let i = index">
+          <ion-row class="mt-1 ion-align-items-center">
+            <ion-col size-md="4" size-lg="4" size-xl="4" size="4">
+              <h5 class="fs-16">{{'SCHEDULED.INSTALLED_BASE'| translate}}</h5>
+              <ng-select [formControl]="getInstallBaseFormControl(email)" placeholder="Select installbase"
+                (change)="disabledEnabledInstallBase()">
+                <ng-option *ngFor="let item of installBaseList" [value]="item" [disabled]="item.disabled">{{
+                  item.InstallBase }} - {{ item.Description }}</ng-option>
+              </ng-select>
+            </ion-col>
+            <ion-col size-md="4" size-lg="4" size-xl="4" size="4">
+              <h5 class="fs-16">{{'SCHEDULED.SKILL'| translate}}</h5>
+              <ng-select [formControl]="getSkillFormControl(email)" placeholder="Select skill" class="wordwrapclass">
+                <ng-option *ngFor="let item of skillGroupList" [value]="item">{{
+                  item.GRPPBLNUM_0 }} - {{ item.TEXTE_0 }}</ng-option>
+              </ng-select>
+            </ion-col>
+            <ion-col size-md="1" size-lg="1" size-xl="1" size="1" class="mt-4"
+              *ngIf="getFormArrayControls().length > 1">
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALaSURBVEiJrZbPThRZFIe/c6o6yguYEbpIg/0PNyZOXBihhnGnEmFJghvdDHF03MwDtC9gXDCjTjJxIwk74zhsTQMak9kYF4pgQwNFq/EFUKm6ZxZ0E5RGAfu3PKfyfefe5J6U8JXUjoSB82wQOIdJBgjqrQijasqkOn2QrpRXd2JIs2KUP92BS0qIXQQ84CXwzETeA4jZIYPjAj1AjNld81ypc+7Jm28KVrLheRHuASkx/jDT28FCudJ0kO4wJ2qjJvIr8ElNRjoqUw93FES5vqsgN4H/vNgfbq8+Wt7p6FtTLfZn/MRNACcQuxbMz4xtE9Qnvw/cj9f1QtdS+cNu4JuSTP9BP+XGgSE1GWqcRKB+5xbPAi/idf15r/BGovTJNtpSZaCY+FbMzM681Y1WfB1IebE/vF84QLD6dC1RhoEDXiwlAKkdCQOnVMW4ma5M/75f+Nas5H+6IWZXET+jTm0I8MxxpxVwAEnkT8A3lwwqJmdAXgSL069bJQgWyhWDWRE7qwhZsOetgjeiyHOQrA8cBra9wCgbjplYYTcwMZkLKtNXPiua1RAGFDCx5itjD7EvC05FAedjvDWx9i8/2DbRHqPO2p1QU2AB5Nj3wJrFhGMCi2rKJHB0tdibbxU86g5zQFGwf1WdPgBiYvmlVQLzuAzEJqmNzRpl+/6KcuGHarE/873w5Xxvd5QLP67kwtsAumF0JeCTn7iJaqb/4H7hUfpkm5pOAGvJupY2BZ1zT96oyQhwwk+58f1I6pt0HPhRsJGupfK7TQFAR2XqIWLXgCE/5aaWCmHXbuHL+d5u2lJTwKAJv6Vfz0w2etse2Gqud8DQceCAwS313K30q8fzzcC1wqlC4rxRgcvAmmAjW+FNBQBLPX2H6/v8EuADr8Cemeg7ADH3A+hxsAIQG/ydrGupcS3fFDQS5U93mEvOi9iAQZfUf1sMIoFFM5kU9f4J5h/VdmL8D0pFJ/wrOiPIAAAAAElFTkSuQmCC"
+                alt="" (click)="removeOrClearInstallBase(i)">
+              <!-- <ion-icon name="remove-circle-outline" class="fs-26" color="danger"
+                (click)="removeOrClearInstallBase(i)"></ion-icon> -->
+            </ion-col>
+            <ion-col size-md="1" size-lg="1" size-xl="1" size="1" class="mt-4">
+              <ion-button (click)="addProductFormGroup(i)"><span class="fs-14 ws-n">{{'SCHEDULED.ADD_COMPONENT'|
+                  translate}}</span></ion-button>
+            </ion-col>
+          </ion-row>
+          <div>
+            <ion-row class="mt-1 ion-align-items-center"
+              *ngFor="let email of getFormArrayProductsControls(i);let k = index">
+              <ion-col size-md="6" size-lg="6" size-xl="6" size="6">
+                <h5 class="fs-16">{{'SCHEDULED.PRODUCT'|translate}}</h5>
+                <ng-select [formControl]="getProductFormControl(email)" placeholder="Select Product">
+                  <ng-option *ngFor="let item of productList" [value]="item">{{
+                    item.Product }} - {{ item.Description }}</ng-option>
+                </ng-select>
+              </ion-col>
+              <ion-col size-md="5" size-lg="5" size-xl="5" size="5">
+                <h5 class="fs-16">{{'STOP.QTY'|translate}}</h5>
+                <ion-input type="number" class="custom-row-form-array" [formControl]="getQtyFormControl(email)"
+                  (ionInput)="ionChange($event,i)"></ion-input>
+              </ion-col>
+              <ion-col size-md="1" size-lg="1" size-xl="1" size="1" class="mt-4"
+                *ngIf="getFormArrayProductsControls(i).length > 1">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALaSURBVEiJrZbPThRZFIe/c6o6yguYEbpIg/0PNyZOXBihhnGnEmFJghvdDHF03MwDtC9gXDCjTjJxIwk74zhsTQMak9kYF4pgQwNFq/EFUKm6ZxZ0E5RGAfu3PKfyfefe5J6U8JXUjoSB82wQOIdJBgjqrQijasqkOn2QrpRXd2JIs2KUP92BS0qIXQQ84CXwzETeA4jZIYPjAj1AjNld81ypc+7Jm28KVrLheRHuASkx/jDT28FCudJ0kO4wJ2qjJvIr8ElNRjoqUw93FES5vqsgN4H/vNgfbq8+Wt7p6FtTLfZn/MRNACcQuxbMz4xtE9Qnvw/cj9f1QtdS+cNu4JuSTP9BP+XGgSE1GWqcRKB+5xbPAi/idf15r/BGovTJNtpSZaCY+FbMzM681Y1WfB1IebE/vF84QLD6dC1RhoEDXiwlAKkdCQOnVMW4ma5M/75f+Nas5H+6IWZXET+jTm0I8MxxpxVwAEnkT8A3lwwqJmdAXgSL069bJQgWyhWDWRE7qwhZsOetgjeiyHOQrA8cBra9wCgbjplYYTcwMZkLKtNXPiua1RAGFDCx5itjD7EvC05FAedjvDWx9i8/2DbRHqPO2p1QU2AB5Nj3wJrFhGMCi2rKJHB0tdibbxU86g5zQFGwf1WdPgBiYvmlVQLzuAzEJqmNzRpl+/6KcuGHarE/873w5Xxvd5QLP67kwtsAumF0JeCTn7iJaqb/4H7hUfpkm5pOAGvJupY2BZ1zT96oyQhwwk+58f1I6pt0HPhRsJGupfK7TQFAR2XqIWLXgCE/5aaWCmHXbuHL+d5u2lJTwKAJv6Vfz0w2etse2Gqud8DQceCAwS313K30q8fzzcC1wqlC4rxRgcvAmmAjW+FNBQBLPX2H6/v8EuADr8Cemeg7ADH3A+hxsAIQG/ydrGupcS3fFDQS5U93mEvOi9iAQZfUf1sMIoFFM5kU9f4J5h/VdmL8D0pFJ/wrOiPIAAAAAElFTkSuQmCC"
+                  alt="" (click)="removeOrClearProduct(i,k)">
+                <!-- <ion-icon name="remove-circle-outline" class="fs-26" color="danger"
+                  (click)="removeOrClearProduct(i,k)"></ion-icon> -->
+              </ion-col>
+              <ion-col size-md="6" size-lg="6" size-xl="6" size="6"></ion-col>
+              <ion-col size-md="5" size-lg="5" size-xl="5" size="5">
+                <div class="text-danger" *ngIf="isFlag && email.get('qty').hasError('pattern')">Please enter a positive
+                  integer </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>
+<ion-footer class="ion-padding">
+  <ion-button expand="block" [disabled]="!scheduledForm.valid || isFormPartDisabled()"
+    (click)="serviceCreation()">{{'CONFIGURATION.SUBMIT'|translate}}</ion-button>
+</ion-footer>

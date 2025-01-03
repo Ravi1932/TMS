@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="d-flex ion-align-items-center" (click)="goTo('/tabs/route-settlement')">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{'ROUTE_SETTLEMENT.TRUCK_DETAIL'| translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="p-20">
+    <ion-col size="12">
+      <ion-card class="m-0 h-150" (click)="goTo('/tabs/route-settlement/open-stock')">
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/open.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/open_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <ion-text>
+            <h2><b class="fw-900 fs-18">
+                {{'ROUTE_SETTLEMENT.OPENING_STOCK'|translate}}</b></h2>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" class="mt-2">
+      <ion-card class="m-0 h-150" (click)="goTo('/tabs/route-settlement/inventory-detail')">
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/stock-list.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/stock-list_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div>
+            <ion-text>
+              <h2><b class="fw-900 fs-18">
+                  {{'ROUTE_SETTLEMENT.INVENTORY_DETAIL'|translate}}</b></h2>
+            </ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" class="mt-2">
+      <ion-card class="m-0 h-150" (click)="goTo('/tabs/route-settlement/close-stock')">
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/sold-out.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/sold-out_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div>
+            <ion-text>
+              <h2><b class="fw-900 fs-18">
+                  {{'ROUTE_SETTLEMENT.CLOSED_STOCK'|translate}}</b></h2>
+            </ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

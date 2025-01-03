@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title> {{'STOP.SIGNATURE'| translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHlSURBVEiJtZXNSltRFIXXFamYSKyzUoc1pQWVdmKhSfQlWsGZpPOipLbioCOLdGCgOPAJfIc2VBGd66T4E4l/k0BfwLYUPwd3i8frueZEcE8Od+211z4/96wj3XNEISRgWNJLSY8MakralvQriiLu1BnIAjPAIelxAnwCsu2Kj1oxwCpQBp4C3cADIA9MAjXgHDgCRkPFx4F/wAFQCuAXgF3gL/C2Fblk4ptALmy9EtALrANnwKs0UgY4tZn3hoo79X3Avm1Xl48wZ3s+1q64o1EyjelkosM6r3qKVoB5D/4F+OnBfwD1JDhkncuegnnLVR2satiih//Ocs9dcNLAZylLX7xs4ogvATcuKjBg+QkXnDWwx9fAOAtcxbJP3HjdxqlIUofh5zYGWUdgIEmd9vHbxn5Je55ZfZX0UdI3m8y0pP/Ae48X9dvYdAUGbznkz8k9d86h6uGXb5yn/aaHKb/pdxOMEvgCsJHCrydx96DDTMsTQNE0pnzJDLGD1rmbVTwE9kizCiMViM1ug/bMLgesEZvdSCvyG2LrrQOFAPHXwA7wh1Z27RQVgWPbzxrxTc8DXcQPzhOuPzgNoBi23qsmWeADtz+ZDaACZNJ0Qh/9IUkvJD1WfNGakraiKNppa9b3ERe4Ip4Q7B0kUAAAAABJRU5ErkJggg=="
+          alt="" class="h-25">
+        <!-- <ion-icon name="close-circle-outline"></ion-icon> -->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-label>
+    <h2 class="mb-2">{{'STOP.RATE_SERVICE'| translate}}</h2>
+  </ion-label>
+  <div class="star-rating" (click)="setRating($event)">
+    <label for="star1" class="star"></label>
+    <input type="radio" id="star1" name="rating" value="1" checked>
+    <label for="star2" class="star"></label>
+    <input type="radio" id="star2" name="rating" value="2">
+    <label for="star3" class="star"></label>
+    <input type="radio" id="star3" name="rating" value="3">
+    <label for="star4" class="star"></label>
+    <input type="radio" id="star4" name="rating" value="4">
+    <label for="star5" class="star"></label>
+    <input type="radio" id="star5" name="rating" value="5">
+  </div>
+  <!-- <ionic-rating-component activeColor="#ffc409" defaultColor="#ffca22" readonly="false" [rating]="signPageData.rating"
+    fontSize="32px" (ratingChanged)="onRatingChange($event)">
+  </ionic-rating-component> -->
+  <hr>
+  <ion-label>
+    <h2>{{'STOP.ENTER_NAME'| translate}}</h2>
+  </ion-label>
+  <ion-item class="ion-no-padding">
+    <ion-input [(ngModel)]="signPageData.name" placeholder="{{'STOP.NAME_PLACE'| translate}}" type="text" required>
+    </ion-input>
+  </ion-item>
+
+  <!-- <ion-label>
+    <h2 class="pt-8">{{'STOP.ENTER_HOURS'| translate}}</h2>
+  </ion-label>
+  <ion-item class="ion-no-padding">
+    <ion-input [(ngModel)]="signPageData.hours" name="hour" placeholder="" type="number" required
+      (keyup)="validateInput($event)">
+    </ion-input>
+  </ion-item>
+  <div *ngIf="showError">
+    <ion-text color="danger">
+      Please enter a positive integer
+    </ion-text>
+  </div>
+  <ion-label>
+    <h2 class="pt-8">{{'STOP.ENTER_MINUTES'| translate}}</h2>
+  </ion-label>
+  <ion-item class="ion-no-padding">
+    <ion-input [(ngModel)]="signPageData.minutes" placeholder="" type="number" required (keyup)="validateIn()">
+    </ion-input>
+  </ion-item>
+  <div *ngIf="showErr">
+    <ion-text color="danger">
+      Please enter a positive number
+    </ion-text>
+  </div> -->
+  <hr>
+  <ion-label>
+    <h2>{{'STOP.ENTER_SIGNATURE'| translate}}</h2>
+  </ion-label>
+  <div class="signature-pad mt-3">
+    <canvas class="signature-pad-canvas" #canvas width="900" height="400" style="touch-action: none;"></canvas>
+  </div>
+  <div class="text-center">
+    <ion-button color="warning" fill="outline" (click)="undo()">{{'STOP.UNDO'| translate}}</ion-button>
+    <ion-button color="danger" fill="outline" (click)="clear()">{{'STOP.CLEAR'| translate}}</ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button color="success" expand="block" [disabled]="!signPageData.name || isCanvasBlank()" (click)="save()">
+      {{'STOP.BTN_SAVE'| translate}}</ion-button>
+  </ion-toolbar>
+</ion-footer>

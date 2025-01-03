@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{'DASHBOARD.DASHBOARD'|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="tertiary">
+  <ion-row class="p-20" style="background: #132c33;">
+    <ion-col size="3" class="d-flex align-items-center justify-content-center">
+      <ion-avatar class="dashboard-avatar logo-light">
+        <img src="assets/images/avatar.png" class="object-fit-cover">
+      </ion-avatar>
+      <ion-avatar class="dashboard-avatar logo-dark">
+        <img src="assets/images/avatar_dark.png" class="object-fit-cover">
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="9" class="w-100">
+      <ion-card class="m-0 ml-2">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th>{{ 'DASHBOARD.TECHNICIAN' | translate}}:</th>
+              <td width="70%" *ngIf="userDetail">{{userDetail[0].XUSER_0}} - {{userDetail[0].Name}}
+              </td>
+            </tr>
+            <tr>
+              <th>{{ 'DASHBOARD.ROUTE_NUMBER' | translate}}:</th>
+              <td width="70%" *ngIf="statusList">{{statusList[0]?.RouteNumber}}</td>
+            </tr>
+            <tr>
+              <th>{{ 'DASHBOARD.STATUS' | translate}}:</th>
+              <td width="70%" *ngIf="statusList">{{statusList[0]?.Status}}</td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content color="tertiary"></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="ion-margin-bottom">
+    <ion-col *ngFor="let item of routes; let i=index" size-md="6" class="ion-no-padding">
+      <ion-card class="mb-0">
+        <div class="logo-light">
+          <ion-card-header color="dark" class="p-8">
+            <ion-row>
+              <ion-col size="7">
+                <ion-card-subtitle>{{ item.XFCY_0 }} - {{ item.XFCYDES_0 }}</ion-card-subtitle>
+                <ion-card-title class="fs-12 white-space-nowrap">{{ 'COMMON.ROUTE_NO' | translate }} :
+                  {{ item.XDRN_0 }}</ion-card-title>
+              </ion-col>
+              <ion-col size="5">
+                <ion-chip color="warning" class="float-right" *ngIf="item.XROUTSTAT_0 == 0">
+                  <ion-label>{{'ROUTES.ACTIVE' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="warning" class="float-right" *ngIf="item.XROUTSTAT_0 == 1">
+                  <ion-label>{{'ROUTES.SCHEDULED' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="danger" class="float-right" *ngIf="item.XROUTSTAT_0 == 2">
+                  <ion-label>{{'ROUTES.IN-PROGRESS' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="success" class="float-right" *ngIf="item.XROUTSTAT_0 == 3">
+                  <ion-label>{{'ROUTES.COMPLETED' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary" class="float-right" *ngIf="item.XROUTSTAT_0 == 4">
+                  <ion-label>{{'ROUTES.CHECKEDIN' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary" class="float-right" *ngIf="item.XROUTSTAT_0 == 5">
+                  <ion-label>{{'ROUTES.CHECKEDOUT' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="danger" class="float-right" *ngIf="item.XROUTSTAT_0 == 6">
+                  <ion-label>{{'ROUTES.CANCEL' | translate}}</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </div>
+        <div class="logo-dark">
+          <ion-card-header color="primary" class="p-8">
+            <ion-row>
+              <ion-col size="7">
+                <ion-card-subtitle>{{ item.XFCY_0 }} - {{ item.XFCYDES_0 }}</ion-card-subtitle>
+                <ion-card-title class="fs-12 white-space-nowrap">{{ 'COMMON.ROUTE_NO' | translate }} :
+                  {{ item.XDRN_0 }}</ion-card-title>
+              </ion-col>
+              <ion-col size="5">
+                <ion-chip color="warning" class="float-right" *ngIf="item.XROUTSTAT_0 == 0">
+                  <ion-label>{{'ROUTES.ACTIVE' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="warning" class="float-right" *ngIf="item.XROUTSTAT_0 == 1">
+                  <ion-label>{{'ROUTES.SCHEDULED' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="danger" class="float-right" *ngIf="item.XROUTSTAT_0 == 2">
+                  <ion-label>{{'ROUTES.IN-PROGRESS' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="success" class="float-right" *ngIf="item.XROUTSTAT_0 == 3">
+                  <ion-label>{{'ROUTES.COMPLETED' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary" class="float-right" *ngIf="item.XROUTSTAT_0 == 4">
+                  <ion-label>{{'ROUTES.CHECKEDIN' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary" class="float-right" *ngIf="item.XROUTSTAT_0 == 5">
+                  <ion-label>{{'ROUTES.CHECKEDOUT' | translate}}</ion-label>
+                </ion-chip>
+                <ion-chip color="danger" class="float-right" *ngIf="item.XROUTSTAT_0 == 6">
+                  <ion-label>{{'ROUTES.CANCEL' | translate}}</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </div>
+        <ion-card-content class="ion-no-padding">
+          <ion-item lines="full" class="fs-14">
+            <ion-label color="primary"><b>{{'STOP.DATE' | translate}}</b></ion-label>
+            <ion-label >{{ item.XDLVDAT_0 | date:'MM-dd-yyyy' }}</ion-label>
+          </ion-item>
+          <ion-item lines="full" class="fs-14">
+            <ion-label color="primary"><b>{{'STOP.TRIP' | translate}}</b></ion-label>
+            <ion-label >{{ item.XTRIP_0 }}</ion-label>
+          </ion-item>
+          <ion-item lines="full" class="fs-14">
+            <ion-label color="primary"><b>{{'COMMON.TOTAL_SERVICES' | translate}}</b></ion-label>
+            <ion-label >{{ item.DocCount }}</ion-label>
+          </ion-item>
+          <ion-button color="primary" class="ion-margin" expand="block" (click)="onStart(item, i)">
+            <ion-icon slot="start" name="navigate-outline"></ion-icon>{{'COMMON.VIEW_SERVICE' | translate}}
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

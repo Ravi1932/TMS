@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="d-flex ion-align-items-center" (click)="onBack()">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{'COMMON.ADD_PRODUCT'| translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div>
+    <ion-card class="mx-0 mb-0">
+      <ion-card-header>
+        <ion-row>
+          <ion-col size="5" class="p-0">
+            <ion-text class="fs-14">Customer :</ion-text><br>
+          </ion-col>
+          <ion-col size="7" class="p-0">
+            <ion-text class="fs-14">{{installDetail.CustomerName}}</ion-text><br>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-text class="fs-14">Service Request No. :</ion-text><br>
+          </ion-col>
+          <ion-col size="7" class="p-0">
+            <ion-text class="fs-14">{{installDetail.RequestNumber}}</ion-text><br>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-text class="fs-14"> Skill Code :</ion-text>
+          </ion-col>
+          <ion-col size="7" class="p-0">
+            <ion-text class="fs-14">{{installDetail.SkillDescription}}</ion-text>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-text class="fs-14">Installed Base No. : </ion-text>
+          </ion-col>
+          <ion-col size="7" class="p-0 d-flex ion-align-items-center">
+            <ion-text class="fs-14">{{ installDetail.Installbase_description }}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+    </ion-card>
+    <form class="basic-container" [formGroup]="emailForm">
+      <div class="row">
+        <div class="col-10">
+            <h5 class="fs-20 fw-900 mt-4 text-center">Parts</h5>
+        </div>
+        <div class="col-2">
+          <div class="ion-text-end ion-padding-top">
+            <ion-button (click)="addEmailFormGroup()">
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJrZbNalNRFIXXiSkINnPbGKhPIII67NykP8476dz6Eq3xGdpaH6JCX0X8wSpESTIo1MSBmiafg6xLT83NPTfghkNgn7XW3mefs/dNUIEBDUnbklqS1iQ1vNWR9EXSmaTTEMK3Ip084TrwGrji2iZA12sS+UfAMbBaVnwLGJjcBQ6AR0A1wlTtewn0jB0AmynxF8DYme8Dd0oktOxAV+buFWU+diZPSx33Jr9p7njmJK75wFksLB7ptKzxA1iJN05cx/2EwC6wm8C0rXWUORqO2gWWE+Q+0E9gar74EVCvaPrOb0k6CSH8LCJLqnrNtRDCUNIb47YrkpreO02IL2KZVlPAR998YWaSBFwAFyVwS9Z8L2AIdHNAO8Af0vYb2Mnh94BhVRKSQk4iPUmfJN2OfGv+/Rr5fkmaSdCaEwEffJylEkdftETvKpI+S6pIepAiLmAPrXle0XTkStKz/xgg0zoTcM9N0SvRaB2gk8DU3JAjoJ45j/0iDhLkdWA9gXllrcPYuRoNu2YBv9A87MbAJXD3383NaFwvHMTi2bhuzQPtcf3BaafuxJyayzL2ep4ibDCd5/ji28DjuE/8zp9YuG/s5dzMc4KsAEd+CZkVffQPZ2puyxsRcaC6pC1JG5Lu6+bflnNNe+htCOH7PI2/R9mioC10S9EAAAAASUVORK5CYII="
+                alt="" class="h-25">
+            </ion-button>
+          </div> 
+        </div>
+      </div>
+      <div class="ion-margin-top">
+        <div *ngFor="let email of getEmailsFormArrayControls(); let i = index">
+          <ion-row class="mt-1 ion-align-items-top ion-align-items-center">
+            <ion-col size="6">
+              <h5 class="fs-16 text-center">Select Parts</h5>
+              <ng-select [formControl]="getEmailProductFormControl(email)" placeholder="Select parts"
+                 [clearable]="true" (clear)="removeOrClearEmail(i)" (change)="selectUnit($event,i)">
+                <ng-option *ngFor="let item of partsList" [value]="item" [disabled]="isPartDisabled(item)">{{
+                  item.ITMREF_0 }} - {{ item.ITMDES1_0 }}</ng-option>
+              </ng-select>
+              <div class="fs-14 text-danger" *ngIf="isFlag && email.get('productName').errors">
+                <div *ngIf="isFlag && email.get('productName').hasError('required')">Parts name is
+                  required.</div>
+              </div>
+            </ion-col>
+            <ion-col size="3" class="ml-1">
+              <h5 class="fs-16 text-center">Quantity</h5>
+              <ion-input type="number" class="custom-row-form-array ion-align-items-center d-flex" [formControl]="getEmailQtyFormControl(email)"
+                (ionInput)="ionChange($event,i)"></ion-input>
+              <div class="fs-14 text-danger" *ngIf="!(isFlag && email.get('qty').errors) && getFormQTYValidation(i)">
+                The provided quantity should not be greater than the available quantity
+              </div>
+              <div class="fs-14 text-danger" *ngIf="isFlag && email.get('qty').errors">
+                <div *ngIf="isFlag && email.get('qty').hasError('required')">Qty is
+                  required</div>
+                <div *ngIf="isFlag && email.get('qty').hasError('pattern')">Please enter a positive
+                  qty </div>
+              </div>
+            </ion-col>
+            <ion-col size="1" class="mt-4" *ngIf="selectedUnits[i]">
+              <ion-input type="text" class="fs-14 custom-row-form-array w-50" [value]="selectedUnits[i]" disabled></ion-input>
+            </ion-col>
+            <ion-col size="1" class="mt-4" *ngIf="getEmailsFormArrayControls().length > 1">
+              <!-- <ion-icon name="remove-circle-outline" class="fs-26" color="danger"
+                (click)="removeOrClearEmail(i)"></ion-icon> -->
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALaSURBVEiJrZbPThRZFIe/c6o6yguYEbpIg/0PNyZOXBihhnGnEmFJghvdDHF03MwDtC9gXDCjTjJxIwk74zhsTQMak9kYF4pgQwNFq/EFUKm6ZxZ0E5RGAfu3PKfyfefe5J6U8JXUjoSB82wQOIdJBgjqrQijasqkOn2QrpRXd2JIs2KUP92BS0qIXQQ84CXwzETeA4jZIYPjAj1AjNld81ypc+7Jm28KVrLheRHuASkx/jDT28FCudJ0kO4wJ2qjJvIr8ElNRjoqUw93FES5vqsgN4H/vNgfbq8+Wt7p6FtTLfZn/MRNACcQuxbMz4xtE9Qnvw/cj9f1QtdS+cNu4JuSTP9BP+XGgSE1GWqcRKB+5xbPAi/idf15r/BGovTJNtpSZaCY+FbMzM681Y1WfB1IebE/vF84QLD6dC1RhoEDXiwlAKkdCQOnVMW4ma5M/75f+Nas5H+6IWZXET+jTm0I8MxxpxVwAEnkT8A3lwwqJmdAXgSL069bJQgWyhWDWRE7qwhZsOetgjeiyHOQrA8cBra9wCgbjplYYTcwMZkLKtNXPiua1RAGFDCx5itjD7EvC05FAedjvDWx9i8/2DbRHqPO2p1QU2AB5Nj3wJrFhGMCi2rKJHB0tdibbxU86g5zQFGwf1WdPgBiYvmlVQLzuAzEJqmNzRpl+/6KcuGHarE/873w5Xxvd5QLP67kwtsAumF0JeCTn7iJaqb/4H7hUfpkm5pOAGvJupY2BZ1zT96oyQhwwk+58f1I6pt0HPhRsJGupfK7TQFAR2XqIWLXgCE/5aaWCmHXbuHL+d5u2lJTwKAJv6Vfz0w2etse2Gqud8DQceCAwS313K30q8fzzcC1wqlC4rxRgcvAmmAjW+FNBQBLPX2H6/v8EuADr8Cemeg7ADH3A+hxsAIQG/ydrGupcS3fFDQS5U93mEvOi9iAQZfUf1sMIoFFM5kU9f4J5h/VdmL8D0pFJ/wrOiPIAAAAAElFTkSuQmCC"
+                alt="" (click)="removeOrClearEmail(i)" class="cursor-pointer">
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col-10">
+        <h5 class="fs-20 fw-900 mt-4 text-center">Services</h5>
+      </div>
+      <div class="col-2">
+        <div class="ion-text-end ion-padding-top">
+          <ion-button (click)="addServiceFormGroup()">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJrZbNalNRFIXXiSkINnPbGKhPIII67NykP8476dz6Eq3xGdpaH6JCX0X8wSpESTIo1MSBmiafg6xLT83NPTfghkNgn7XW3mefs/dNUIEBDUnbklqS1iQ1vNWR9EXSmaTTEMK3Ip084TrwGrji2iZA12sS+UfAMbBaVnwLGJjcBQ6AR0A1wlTtewn0jB0AmynxF8DYme8Dd0oktOxAV+buFWU+diZPSx33Jr9p7njmJK75wFksLB7ptKzxA1iJN05cx/2EwC6wm8C0rXWUORqO2gWWE+Q+0E9gar74EVCvaPrOb0k6CSH8LCJLqnrNtRDCUNIb47YrkpreO02IL2KZVlPAR998YWaSBFwAFyVwS9Z8L2AIdHNAO8Af0vYb2Mnh94BhVRKSQk4iPUmfJN2OfGv+/Rr5fkmaSdCaEwEffJylEkdftETvKpI+S6pIepAiLmAPrXle0XTkStKz/xgg0zoTcM9N0SvRaB2gk8DU3JAjoJ45j/0iDhLkdWA9gXllrcPYuRoNu2YBv9A87MbAJXD3383NaFwvHMTi2bhuzQPtcf3BaafuxJyayzL2ep4ibDCd5/ji28DjuE/8zp9YuG/s5dzMc4KsAEd+CZkVffQPZ2puyxsRcaC6pC1JG5Lu6+bflnNNe+htCOH7PI2/R9mioC10S9EAAAAASUVORK5CYII="
+              alt="" class="h-25">
+            <!-- <ion-icon class="fs-24" name="add-circle-outline"></ion-icon> -->
+          </ion-button>
+        </div>
+      </div>
+    </div>
+    <div class="ion-margin-top">
+      <div *ngFor="let email of getServiceFormArrayControls(); let i = index">
+        <ion-row class="mt-1 ion-align-items-center ion-align-items-center">
+          <ion-col size="10">
+            <h5 class="fs-16 text-center">Select Service</h5>
+            <ng-select [formControl]="getServiceProductFormControl(email)" placeholder="Select Service" [clearable]="true" (clear)="removeOrClearService(i)" 
+            (change)="selectServiceUnit($event,i)">
+              <ng-option *ngFor="let item of serviceList" [value]="item" [disabled]="isServiceDisabled(item)">{{
+                item.ITMREF_0 }} - {{
+                item.ITMDES1_0 }}</ng-option>
+            </ng-select>
+          </ion-col>
+          <ion-col size="1" class="mt-4" *ngIf="selectedServiceUnits[i]">
+            <ion-input type="text" class="fs-14 custom-row-form-array" [value]="selectedServiceUnits[i]" disabled></ion-input>
+          </ion-col>
+          <ion-col size="1" class="mt-4" *ngIf="getServiceFormArrayControls().length > 1">
+            <!-- <ion-icon name="remove-circle-outline" class="fs-26" color="danger"
+              (click)="removeOrClearService(i)"></ion-icon> -->
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALaSURBVEiJrZbPThRZFIe/c6o6yguYEbpIg/0PNyZOXBihhnGnEmFJghvdDHF03MwDtC9gXDCjTjJxIwk74zhsTQMak9kYF4pgQwNFq/EFUKm6ZxZ0E5RGAfu3PKfyfefe5J6U8JXUjoSB82wQOIdJBgjqrQijasqkOn2QrpRXd2JIs2KUP92BS0qIXQQ84CXwzETeA4jZIYPjAj1AjNld81ypc+7Jm28KVrLheRHuASkx/jDT28FCudJ0kO4wJ2qjJvIr8ElNRjoqUw93FES5vqsgN4H/vNgfbq8+Wt7p6FtTLfZn/MRNACcQuxbMz4xtE9Qnvw/cj9f1QtdS+cNu4JuSTP9BP+XGgSE1GWqcRKB+5xbPAi/idf15r/BGovTJNtpSZaCY+FbMzM681Y1WfB1IebE/vF84QLD6dC1RhoEDXiwlAKkdCQOnVMW4ma5M/75f+Nas5H+6IWZXET+jTm0I8MxxpxVwAEnkT8A3lwwqJmdAXgSL069bJQgWyhWDWRE7qwhZsOetgjeiyHOQrA8cBra9wCgbjplYYTcwMZkLKtNXPiua1RAGFDCx5itjD7EvC05FAedjvDWx9i8/2DbRHqPO2p1QU2AB5Nj3wJrFhGMCi2rKJHB0tdibbxU86g5zQFGwf1WdPgBiYvmlVQLzuAzEJqmNzRpl+/6KcuGHarE/873w5Xxvd5QLP67kwtsAumF0JeCTn7iJaqb/4H7hUfpkm5pOAGvJupY2BZ1zT96oyQhwwk+58f1I6pt0HPhRsJGupfK7TQFAR2XqIWLXgCE/5aaWCmHXbuHL+d5u2lJTwKAJv6Vfz0w2etse2Gqud8DQceCAwS313K30q8fzzcC1wqlC4rxRgcvAmmAjW+FNBQBLPX2H6/v8EuADr8Cemeg7ADH3A+hxsAIQG/ydrGupcS3fFDQS5U93mEvOi9iAQZfUf1sMIoFFM5kU9f4J5h/VdmL8D0pFJ/wrOiPIAAAAAElFTkSuQmCC"
+              alt="" (click)="removeOrClearService(i)" class="cursor-pointer">
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-padding">
+  <ion-button expand="block" (click)="onSubmit()"
+  [disabled]="isFormPartDisabled() || (departureTime)">Submit</ion-button>
+</ion-footer>

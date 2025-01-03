@@ -1,0 +1,146 @@
+.stop-list {
+  width: 100%;
+  position: relative;
+
+  .list-data {
+    min-height: 145px;
+  }
+
+  .todo-list-data {
+    min-height: 101px;
+  }
+
+  .stop-progress-bar {
+    width: 140px !important;
+  }
+
+  .chipmt {
+    margin-top: 22px;
+  }
+
+  .bs-wizard {
+    position: absolute;
+    top: 16px;
+    left: 35px;
+    z-index: 1;
+
+    .bs-wizard-step {
+      padding: 0;
+      position: relative;
+      min-height: 169px;
+
+      .bs-wizard-dot {
+        width: 64px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: var(--ion-color-primary-tint);
+        border-radius: 15px;
+        color: var(--ion-color-light);
+        padding: 3px 0;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+
+        img {
+          max-width: 30% !important;
+        }
+      }
+
+      .progress {
+        position: absolute;
+        border-radius: 0px;
+        height: 100%;
+        box-shadow: none;
+        width: 6px;
+        left: 29px;
+        top: 15px;
+        margin-top: 0 !important;
+        animation: moveline 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    .check-in {
+      padding: 0;
+      position: relative;
+      min-height: 130px;
+    }
+
+    .bs-wizard-step.todo-steps {
+      min-height: 130px !important;
+    }
+
+    .bs-wizard-step.isSkip {
+      min-height: 168px !important;
+    }
+  }
+}
+
+.bs-wizard>.bs-wizard-step>.progress>.progress-bar {
+  width: 0px;
+  box-shadow: none;
+  background: var(--ion-color-primary-tint);
+}
+
+.bs-wizard>.bs-wizard-step.complete>.progress>.progress-bar {
+  width: 100%;
+}
+
+.bs-wizard>.bs-wizard-step.active>.progress>.progress-bar {
+  width: 100%;
+  height: 0px;
+}
+
+.bs-wizard>.bs-wizard-step:first-child.active>.progress>.progress-bar {
+  width: 0%;
+}
+
+.bs-wizard>.bs-wizard-step:last-child.active>.progress>.progress-bar {
+  width: 100%;
+}
+
+.bs-wizard>.bs-wizard-step:last-child>.progress {
+  display: none !important;
+}
+
+@keyframes moveline {
+  from {
+    height: 0px;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+.no-stops {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.segment_class{
+  background-color: #00815D;
+}
+
+@media (prefers-color-scheme: dark) {
+  .segment_class{
+    background-color: #009900;
+  }
+}
+// ion-refresher {
+//   background-color: var(--ion-color-tertiary);
+
+//   ion-refresher-content {
+//     background-color: var(--ion-color-tertiary);
+
+//     .refresher-pulling {
+//       background-color: var(--ion-color-tertiary);
+//     }
+//   }
+// }

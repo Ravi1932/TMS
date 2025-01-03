@@ -1,0 +1,10 @@
+.consumption {
+  position: relative;
+
+  .remove-button {
+    position: absolute;
+    top: -8px;
+    right: -15px;
+    z-index: 2;
+  }
+}

@@ -1,0 +1,240 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="d-flex ion-align-items-center" (click)="onClick()">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{'COMMON.CONFIRM_SERVICES'| translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="tertiary">
+  <ng-container *ngFor="let item of installBaseList">
+    <ion-card>
+      <ion-card-header color="primary">
+        <ion-row>
+          <ion-col size="5" class="p-0">
+            <ion-text>Customer :</ion-text><br>
+          </ion-col>
+          <ion-col size="7" class="p-0">
+            <ion-text>{{item.CustomerName}}</ion-text><br>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-text>Service Request No. :</ion-text><br>
+          </ion-col>
+          <ion-col size="7" class="p-0">
+            <ion-text>{{item.RequestNumber}}</ion-text><br>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-text> Skill Code :</ion-text>
+          </ion-col>
+          <ion-col size="7" class="p-0">
+            <ion-text>{{item.SkillDescription}}</ion-text>
+          </ion-col>
+          <ion-col size="5" class="p-0">
+            <ion-text class="fs-16">Installed Base No. : </ion-text>
+          </ion-col>
+          <ion-col size="5" class="p-0 d-flex ion-align-items-center">
+            <ion-text class="fs-16">{{ item.Installbase_description }}</ion-text>
+          </ion-col>
+          <ion-col size="2" class="p-0 ion-justify-content-end d-flex">
+            <!-- <ion-icon class="fs-32" name="add-circle-outline" (click)="goTo(item)">
+                        </ion-icon> -->
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJrZbNalNRFIXXiSkINnPbGKhPIII67NykP8476dz6Eq3xGdpaH6JCX0X8wSpESTIo1MSBmiafg6xLT83NPTfghkNgn7XW3mefs/dNUIEBDUnbklqS1iQ1vNWR9EXSmaTTEMK3Ip084TrwGrji2iZA12sS+UfAMbBaVnwLGJjcBQ6AR0A1wlTtewn0jB0AmynxF8DYme8Dd0oktOxAV+buFWU+diZPSx33Jr9p7njmJK75wFksLB7ptKzxA1iJN05cx/2EwC6wm8C0rXWUORqO2gWWE+Q+0E9gar74EVCvaPrOb0k6CSH8LCJLqnrNtRDCUNIb47YrkpreO02IL2KZVlPAR998YWaSBFwAFyVwS9Z8L2AIdHNAO8Af0vYb2Mnh94BhVRKSQk4iPUmfJN2OfGv+/Rr5fkmaSdCaEwEffJylEkdftETvKpI+S6pIepAiLmAPrXle0XTkStKz/xgg0zoTcM9N0SvRaB2gk8DU3JAjoJ45j/0iDhLkdWA9gXllrcPYuRoNu2YBv9A87MbAJXD3383NaFwvHMTi2bhuzQPtcf3BaafuxJyayzL2ep4ibDCd5/ji28DjuE/8zp9YuG/s5dzMc4KsAEd+CZkVffQPZ2puyxsRcaC6pC1JG5Lu6+bflnNNe+htCOH7PI2/R9mioC10S9EAAAAASUVORK5CYII="
+              alt="" class="h-25"  (click)="goTo(item)" >
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content *ngIf="item.part.length > 0 || item.service.length > 0">
+        <ng-container *ngIf="item && item.part && item.part && item.part.length">
+          <h5 class="fw-900 fw-600 fs-18 mt-2"><b>PARTS</b></h5>
+          <hr class="m-0 mb-1">
+          <div *ngFor="let items of item.part">
+            <ion-row>
+              <ion-col size="10">
+                <ion-text class="fs-14 ">{{ items.Product }} - {{ items.descrition }}</ion-text>
+              </ion-col>
+              <ion-col size="1" class="d-flex ion-justify-content-end">
+                <ion-text class="fs-14 ">{{ items.Quantity  ? items.Quantity : items.QTY_0}}</ion-text>
+              </ion-col>
+              <ion-col size="1" class="d-flex ion-justify-content-end">
+                <img class="h-18"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAI7SURBVEiJtZW7ThtBFIa/M2MLIdnu8gCWDSJCKWAtEAVFXgApBU0UiRR5Cgq65BWoIuVSJdCkoE6akMIxoEggMLcgIiVSRBObSGDPnBS7RsRZs7tKMs3Ozjnn/86/lxn4z0PSJDWDYBqYFbAACs57/25sc/PjXwP2JifvicgqYPpCHpgbbTTWMgH2q9UhSqUJtbYQyvglYFxVH4m1LQCcKyHyFNjCmMcA4lz78uJiY3x7+3IgQOfn7f7R0XtgOslZfLvyYaRcnpWVFddbyl2P756cVCxMi8gTFXmbSVv1rqouHh4eloGDWEDB2tOfzn1DdRHVxSwADS9fban05Tdwf+Lu1FTZOvfGwy2B5ynFFwx87zo3d3tr63NiQTMIXjeDYCeNeJS/sxcEr+Ji/Z9e1JK2gGJUvNwMguWb5kBBVNtxUrm4RURaQCG6G7sWGTQvYsyPLA7a1wBpRoEBDmIBEjrInc7MDCcpRzm5yHU6ANACuDg/LyYBejkSvrd0AC/SBvBDQ4mPSfP5sImoJhUA71sA2u0mOlBjigA+i4OrTS0qvhHgfW9TzABwLrQrkgjo5YgxGf4Da1t4j/G+qMZc7YyI/DE33hdVJBvAeN8Kq03BiCxdrcfM1ZgxVDEDHlEsoN3pnA3n8w7vJyobG88kPL2o1uvrvZxqvb6uYA5qtftAt93pnMVpDTwy92q1l6L6YFC8T+TFSKOxkNoBwGi5/LB5fLxm4I6q2lhhEee9/zRSqazSaKTp5d+PX5Ma6aw2x4uYAAAAAElFTkSuQmCC"
+                  alt="" (click)="removePartService(items,item.InstallBase,'part')"
+                  [ngClass]="isDisabled ? 'pointer-none' : ''">
+              </ion-col>
+            </ion-row>
+            <hr class="m-0 mb-1">
+          </div>
+        </ng-container>
+        <ng-container *ngIf="item && item.service && item.service && item.service.length">
+          <p class="fw-600 fs-18 mt-2"><b>Services</b></p>
+          <div *ngFor="let items of item.service">
+            <ion-row>
+              <ion-col size="6">
+                <ion-text class="fs-14 ">{{ items.Product }} - {{ items.descrition }}</ion-text>
+              </ion-col>
+              <ion-col size="5" class="d-inline-flex ion-align-items-center ion-justify-content-end">
+                <ion-text class="fs-14 mr-2">{{ items.Duration}}</ion-text>
+                <ion-button *ngIf="items.XFLAG_0 == 2" class="m-0" size="small"
+                  (click)="goToJobAdd(item.InstallBase,item.Installbase_description,items.Product,items.descrition)">
+                  <!-- <ion-icon class="fs-22 pr-1" name="add-circle-outline"></ion-icon> -->
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJrZbNalNRFIXXiSkINnPbGKhPIII67NykP8476dz6Eq3xGdpaH6JCX0X8wSpESTIo1MSBmiafg6xLT83NPTfghkNgn7XW3mefs/dNUIEBDUnbklqS1iQ1vNWR9EXSmaTTEMK3Ip084TrwGrji2iZA12sS+UfAMbBaVnwLGJjcBQ6AR0A1wlTtewn0jB0AmynxF8DYme8Dd0oktOxAV+buFWU+diZPSx33Jr9p7njmJK75wFksLB7ptKzxA1iJN05cx/2EwC6wm8C0rXWUORqO2gWWE+Q+0E9gar74EVCvaPrOb0k6CSH8LCJLqnrNtRDCUNIb47YrkpreO02IL2KZVlPAR998YWaSBFwAFyVwS9Z8L2AIdHNAO8Af0vYb2Mnh94BhVRKSQk4iPUmfJN2OfGv+/Rr5fkmaSdCaEwEffJylEkdftETvKpI+S6pIepAiLmAPrXle0XTkStKz/xgg0zoTcM9N0SvRaB2gk8DU3JAjoJ45j/0iDhLkdWA9gXllrcPYuRoNu2YBv9A87MbAJXD3383NaFwvHMTi2bhuzQPtcf3BaafuxJyayzL2ep4ibDCd5/ji28DjuE/8zp9YuG/s5dzMc4KsAEd+CZkVffQPZ2puyxsRcaC6pC1JG5Lu6+bflnNNe+htCOH7PI2/R9mioC10S9EAAAAASUVORK5CYII="
+                    alt="" class="h-11">
+                  <p class="ml-2">ADD JOB</p>
+                </ion-button>
+                <ion-button *ngIf="items.XFLAG_0 == 3 && items.Duration == ' '" class="m-0" size="small"
+                  (click)="goToJobAdd(item.InstallBase,item.Installbase_description,items.Product,items.descrition)">
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJrZbNalNRFIXXiSkINnPbGKhPIII67NykP8476dz6Eq3xGdpaH6JCX0X8wSpESTIo1MSBmiafg6xLT83NPTfghkNgn7XW3mefs/dNUIEBDUnbklqS1iQ1vNWR9EXSmaTTEMK3Ip084TrwGrji2iZA12sS+UfAMbBaVnwLGJjcBQ6AR0A1wlTtewn0jB0AmynxF8DYme8Dd0oktOxAV+buFWU+diZPSx33Jr9p7njmJK75wFksLB7ptKzxA1iJN05cx/2EwC6wm8C0rXWUORqO2gWWE+Q+0E9gar74EVCvaPrOb0k6CSH8LCJLqnrNtRDCUNIb47YrkpreO02IL2KZVlPAR998YWaSBFwAFyVwS9Z8L2AIdHNAO8Af0vYb2Mnh94BhVRKSQk4iPUmfJN2OfGv+/Rr5fkmaSdCaEwEffJylEkdftETvKpI+S6pIepAiLmAPrXle0XTkStKz/xgg0zoTcM9N0SvRaB2gk8DU3JAjoJ45j/0iDhLkdWA9gXllrcPYuRoNu2YBv9A87MbAJXD3383NaFwvHMTi2bhuzQPtcf3BaafuxJyayzL2ep4ibDCd5/ji28DjuE/8zp9YuG/s5dzMc4KsAEd+CZkVffQPZ2puyxsRcaC6pC1JG5Lu6+bflnNNe+htCOH7PI2/R9mioC10S9EAAAAASUVORK5CYII="
+                    alt="" class="h-11">
+                  <!-- <ion-icon class="fs-22 pr-1" name="add-circle-outline"></ion-icon> -->
+                  <p class="ml-2">ADD JOB TIME</p>
+                </ion-button>
+                <div class="logo-light" >
+                  <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAALjSURBVEiJ7ZRNbExhFIaf881cbcXCTyNUkIhE2Yr4iwihLRYWzKTV6XRWLG0kZKrTr1MtiVhYakKqnSotwobqEBaiEguxkFakCRIEpeKf6b3H4k7aaSv+NjbezZe895z3/b7z5lz4j38N+WWFDU2CghKMLsHT+QAYeYzqffRrGtv17e8MbHkR4sSBCmB6ls1kTyd7vkHlFI7XRE3q+e8ZdIYC9OftRSUOTEa4DNKB4TrDC7IiD4sQsw60AqQM+IhII8WfDxPucnPlzBjxxshs+vKvodII3EVkKYm2LXiZblyNIQMXkIELGIniyCXqUpsRswz0HqoH6ctPY2OzfvwCGytG3G5gLmgcXXgYaz2S1atR7yIwAxjKVk8DBlHdik3dwlqDDOwFDgBPMFpGberBqIGtXIKYG8AUlAi27bzPVxQiwX7gG2pi2JM9ANRXlQItQBBHiom3vs7yIaAVeIcG1mJb+g0HonOQQBooQHXDiDiABHf5N9fqEXGAurYrQAwoJKM7c/guVDb62blpbHmRwfXOgBaiZhs2dWtc5MuBIRKpq4xHoq0HGEJkxRjett4EtgMzkWDnaMji/Xon/hiiBh0OAy+BsySrV4/7fhuYRrKqZEJvMlqGH3bvWD6yBjgHvCCoYYM9/QxDCfAJ9a5mg/IRNMeAQaCF+qpSFEER6qObQE8Ar/Cc5hzxMCo9wAeMbqQm9Xx0LA2RRXjSDcwDEiz+cohwl4uNrELkIlAIvM1WTwVeIbKVRGsvnaEAffn7gAbgEcYtpfbUQxi/yTY2C+O2o6wHehFvN4n2OzRFZ5DRnTmB9uI5zdjjb0hWLkPNUWAlyDWCmUpqOl6MTHnCbDtDAfry9oDsB6YgdIN2YJzrDM9/6o/u8Rxcdz2i5ShlwHuQBnTBEaz1xsQ4wSD3NeLGgR34WwwTf3avUdpxhptyb/17BiNGoUmQv8EfAUV+lz5F5TazC9Lsas78tP8//jm+A0U/CZOl0hN+AAAAAElFTkSuQmCC"
+                  alt="" *ngIf="items.XFLAG_0 == 3 && items.Duration != ' '"
+                  (click)="goToJobAdd(item.InstallBase,item.Installbase_description,items.Product,items.descrition)" class="h-11">
+                </div>
+                <div class="logo-dark">
+                  <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFnSURBVDiNzdK/alNxGMbxz+8ckyaLprgYqYODeBldFES09AYC1YrBQouXkE7i0iGVkkwnkhso6BDoIG7SSyhS4p/qInToktMk57gcTEUp3fSZXh4eeB++78v/rS1VW6rnRcIfzo7bYutYRr3IHGFXsO2pg7Px6NfUVdL1UuwDRoIHMnWZazJLGMvt63qhq/R7g7bLyt4KcjQwRg+LyOXem1oRqYj0MXXJQ6tOIomaij3BJ/PuavoseC04lLoiVRMMxXqeGUrdwZGJPYla0DHAD00NQW7HvNg3qZoNKUhUnDo2dd2aYy2Rur7c1aggEdn8C9Dz8QdBHiRqTg0Eh0Ye2ZDqGAiGyp6DVFuwoOm+tjkVicxNwb0ZxDlvEMk0ZEZiPcFise+dicfKqnJ9jMWWrDqZ1e4qyW0K1pCgr+pr0eCGqYZgBa9819IymZ3xrDpuiazLLWOhcL9gV2zbEx8vDuoCr/zv9RM+hmmPkJMPHQAAAABJRU5ErkJggg=="
+                  alt="" *ngIf="items.XFLAG_0 == 3 && items.Duration != ' '"
+                  (click)="goToJobAdd(item.InstallBase,item.Installbase_description,items.Product,items.descrition)" class="h-11">
+                </div>
+                <!-- <ion-icon color="primary" *ngIf="items.XFLAG_0 == 3 && items.Duration != ' '"
+                                    (click)="goToJobAdd(item.InstallBase,items.Product)" name="eye-outline"></ion-icon> -->
+              </ion-col>
+              <ion-col size="1" class="d-inline-flex ion-align-items-center ion-justify-content-end">
+                <!-- <ion-icon class="text-danger" name="trash-outline"
+                                    (click)="removePartService(items.Product,item.InstallBase,'service')"
+                                    [ngClass]="departureTime ? 'pointer-none' : ''">
+                                </ion-icon> -->
+                <img class="h-18"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAI7SURBVEiJtZW7ThtBFIa/M2MLIdnu8gCWDSJCKWAtEAVFXgApBU0UiRR5Cgq65BWoIuVSJdCkoE6akMIxoEggMLcgIiVSRBObSGDPnBS7RsRZs7tKMs3Ozjnn/86/lxn4z0PSJDWDYBqYFbAACs57/25sc/PjXwP2JifvicgqYPpCHpgbbTTWMgH2q9UhSqUJtbYQyvglYFxVH4m1LQCcKyHyFNjCmMcA4lz78uJiY3x7+3IgQOfn7f7R0XtgOslZfLvyYaRcnpWVFddbyl2P756cVCxMi8gTFXmbSVv1rqouHh4eloGDWEDB2tOfzn1DdRHVxSwADS9fban05Tdwf+Lu1FTZOvfGwy2B5ynFFwx87zo3d3tr63NiQTMIXjeDYCeNeJS/sxcEr+Ji/Z9e1JK2gGJUvNwMguWb5kBBVNtxUrm4RURaQCG6G7sWGTQvYsyPLA7a1wBpRoEBDmIBEjrInc7MDCcpRzm5yHU6ANACuDg/LyYBejkSvrd0AC/SBvBDQ4mPSfP5sImoJhUA71sA2u0mOlBjigA+i4OrTS0qvhHgfW9TzABwLrQrkgjo5YgxGf4Da1t4j/G+qMZc7YyI/DE33hdVJBvAeN8Kq03BiCxdrcfM1ZgxVDEDHlEsoN3pnA3n8w7vJyobG88kPL2o1uvrvZxqvb6uYA5qtftAt93pnMVpDTwy92q1l6L6YFC8T+TFSKOxkNoBwGi5/LB5fLxm4I6q2lhhEee9/zRSqazSaKTp5d+PX5Ma6aw2x4uYAAAAAElFTkSuQmCC"
+                  alt="" (click)="removePartService(items,item.InstallBase,'service')"
+                  [ngClass]="isDisabled ? 'pointer-none' : ''">
+              </ion-col>
+            </ion-row>
+            <hr class="m-0 mb-1">
+          </div>
+        </ng-container>
+        <!-- <ion-text class="f-900">Note : please add minimum one parts and all services add job card</ion-text> -->
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ng-container  *ngFor="let item of imgArray, let i=index ">
+        <ion-col size="12" size-md="6" size-lg="3">
+            <ion-row class="d-flex ion-align-items-center">
+              <ion-col size="10" size-md="8">
+                <ion-text class="fs-16">{{item.label}}</ion-text> 
+              </ion-col>
+              <ion-col size="2" size-md="4" class="d-flex ion-justify-content-end">
+                <b class="mandatory-btn top-117px">*</b>
+                 <ion-fab-button color="primary" style="height: 35px;width: 35px;"
+                  [disabled]="utilService$.isOnline ?  !(this.installBaseListDetailsPart && this.installBaseListDetailsPart.length) && !(this.installBaseListDetailsServices&& this.installBaseListDetailsServices.length) || isButtonDisabled() : isButtonDisabled()"
+                  [ngClass]="isDisabled ? 'pointer-none' : ''" (click)="captureImage(i)"> 
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJ1ZXPi01xGMY/7xjya6aRjMKCBTZ2zJDQNLkpC0p2/oExJMrNwn4Wxo+FlZqNpBSxnkQpCtNYsKA0rKwkYqaZuYaPxTnD6c455447G57N6Zzn+T7P+3a+3/cL/zuijFQXAaeA/cCSOroG3AeuRsSPIo+WBgVcAi4D63O4DcAVYLCBRz7UDnVKHSrRDKWajiJNpMKVwDlgB9CacquA7UB3RIwUBHQBz4FR4HP6eQYYAS5ExHioATwE9gBPgamMxzugLyIsCAjgGrAp83kpsAt4BFRQt5qgr6hNtUXtVU+qZ9SKurhE3596bkHtSV96CsT71NfOxZjam9GtVm+mz9+epbtIrQDDJP/qMNAOtAFHgGlgWD2QXZJnktuBulx9r75S23LWtasv1A/qiiLPsg4OAhuB4xHxrZ6MiK/AaWAdcKjIpCxgN/AFeFKieQxMAl3NBADUirYoQET8BMbLfMoC3gKd6uYiQcqtAd40E3CH5NANpAcqDwPABHD7rwMi4iNQBY4C19W1mco71Rspdz4iPhWWOY+DdlatqdPqS3VU/a5OqtVGnq15grpOLqr3gGPANpJ74S5wKyLGGq3PzqL+huJ5Qj0xO4tmp+kDYC/wjGRfLwTLgJ2k0zR7H1SBbv7cB81ihqTQwYiYWKDXP4BftIRgCl6FF0oAAAAASUVORK5CYII="
+                    alt="" class="h-20">
+                </ion-fab-button>  
+                <!-- <ion-fab-button color="primary" style="height: 35px;width: 35px;"
+                  [disabled]="isButtonDisabled()"
+                  (click)="captureImage(i)"> 
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJ1ZXPi01xGMY/7xjya6aRjMKCBTZ2zJDQNLkpC0p2/oExJMrNwn4Wxo+FlZqNpBSxnkQpCtNYsKA0rKwkYqaZuYaPxTnD6c455447G57N6Zzn+T7P+3a+3/cL/zuijFQXAaeA/cCSOroG3AeuRsSPIo+WBgVcAi4D63O4DcAVYLCBRz7UDnVKHSrRDKWajiJNpMKVwDlgB9CacquA7UB3RIwUBHQBz4FR4HP6eQYYAS5ExHioATwE9gBPgamMxzugLyIsCAjgGrAp83kpsAt4BFRQt5qgr6hNtUXtVU+qZ9SKurhE3596bkHtSV96CsT71NfOxZjam9GtVm+mz9+epbtIrQDDJP/qMNAOtAFHgGlgWD2QXZJnktuBulx9r75S23LWtasv1A/qiiLPsg4OAhuB4xHxrZ6MiK/AaWAdcKjIpCxgN/AFeFKieQxMAl3NBADUirYoQET8BMbLfMoC3gKd6uYiQcqtAd40E3CH5NANpAcqDwPABHD7rwMi4iNQBY4C19W1mco71Rspdz4iPhWWOY+DdlatqdPqS3VU/a5OqtVGnq15grpOLqr3gGPANpJ74S5wKyLGGq3PzqL+huJ5Qj0xO4tmp+kDYC/wjGRfLwTLgJ2k0zR7H1SBbv7cB81ihqTQwYiYWKDXP4BftIRgCl6FF0oAAAAASUVORK5CYII="
+                    alt="" class="h-20">
+                </ion-fab-button>  -->
+              </ion-col>
+              <ion-col size="12" *ngIf="item.image">
+                <div class="cam-image">
+                  <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANbSURBVEiJtZVPbBtVEMZ/8xzbil0K3CKXxE6yb+0KERVRVCn9Iw7cuBcpIBDQA+0BNQGhCBAnEH8OrUBR4cCx5QASEuKEoAcERSmqqKiqNFlv7LVbXMSBCtTWceLd4ZDYchKbukid0+5733wz8+bN9+Aem/QDKuXzE6L6qImiIQCMuW6MufjQ4uJlAf1fAf6YmEiv1OvHgKPAaA9YVVRPJVOpuaFLl251A5iuGVt7aKVeXwA+RLWM6kthLJaP1eupW4lEMgxDV+EFhSUVeW+lXr9csvZQXxVUHOewipwGKkbkxRHP+7FXlQCVfH6/RtFnwJioPpv1/S97Bqi67sFI9Sxwfk31Kev7//wXecuWx8buj8ViXwP7FJ4YLRbPbwtQy2RSa+n0okIjDMO946XS3/2QtysZGXlQE4l5RBJrqgXr+w3o6MHqjh3HFYZV9cjdkgNkq9UbxpgjQG4Ajm3aVDCBteXAcc5udQysPRNY+862dcd5N7D2+22VWPtt2Vqv9W8ArhUKDwM54EyX5MrAm4HrnmiTu+4JRN5A9betYFX9QsAG1u4GGABohuFjAqgxP291yBWLbwWOMwjMBK7bYplGdS7r+69txcdUfwhFUNgDXBnYcBhChHQ8fq1LBeR8/9WK666q6iyAwKcjvv9K1yluNH5ncBARybSPyIhEAH81m31JR5+m7QAR/AmQVN3VDVm29gNVnVX4CJGTCi9XHOdj7SY1yeQuAFW9Dhs9iEXRhcgYJIomgcVOfMVx3lZ4HdW5nO9PC+hGL6YrrruG58104kORdckQudiuYHh5eYH12/LMtoxEJhE5me0485znzYjI+6q6dztcDisURz1vU6KUHWc2sFZ7iVY/VnHdA4G1Wnac4+2ArY9aJpNaTaevKDSiMHz8bqe5nMs9IPH4PJDsKhWZWu22GDMlkDOx2DdFx9nZL3nRcXZKIvEVkI1Enm6RbwoAkF1aOieqUwL7BkQuVPL5/XciD8bHJ+Mi86hOiupzY573S+d+13tfcd0DGkWnEckqfAd8HoXhuciY6moyqfc1GsOhyEFgSuBJoCwiz2c976etXHd6Mo+yroy9nswSIqcSN29+kqnVbncD9DW5VwuFR6Jmcw+QUZFI1ofo16zvL/Tjf0/tX9Vea9MJtoEoAAAAAElFTkSuQmCC"
+                  alt="" (click)="removeImage(i)" class="remove-image h-25">
+                <img class="camera-img" [src]="'data:image/jpeg;base64,'+item.image">
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-card-content>
+    </ion-card>
+    <!-- <div class="cam-image">
+      <ion-row>
+        <ion-col class="camimg-view" *ngFor="let item of imgArray, let i=index " size-xs="6" size-sm="6" size-md="6"
+          size-lg="3" size-xl="3">
+         <ion-text class="fs-16 d-flex ion-justify-content-center" *ngIf="i == 0">1. Hour Meter</ion-text>
+         <ion-text class="fs-16 d-flex ion-justify-content-center" *ngIf="i == 1">2. Data Tag</ion-text>
+         <ion-text class="fs-16 d-flex ion-justify-content-center" *ngIf="i == 2">3. 4 - Corners</ion-text>
+         <ion-text class="fs-16 d-flex ion-justify-content-center" *ngIf="i == 3">4. Picture of Problem</ion-text>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANbSURBVEiJtZVPbBtVEMZ/8xzbil0K3CKXxE6yb+0KERVRVCn9Iw7cuBcpIBDQA+0BNQGhCBAnEH8OrUBR4cCx5QASEuKEoAcERSmqqKiqNFlv7LVbXMSBCtTWceLd4ZDYchKbukid0+5733wz8+bN9+Aem/QDKuXzE6L6qImiIQCMuW6MufjQ4uJlAf1fAf6YmEiv1OvHgKPAaA9YVVRPJVOpuaFLl251A5iuGVt7aKVeXwA+RLWM6kthLJaP1eupW4lEMgxDV+EFhSUVeW+lXr9csvZQXxVUHOewipwGKkbkxRHP+7FXlQCVfH6/RtFnwJioPpv1/S97Bqi67sFI9Sxwfk31Kev7//wXecuWx8buj8ViXwP7FJ4YLRbPbwtQy2RSa+n0okIjDMO946XS3/2QtysZGXlQE4l5RBJrqgXr+w3o6MHqjh3HFYZV9cjdkgNkq9UbxpgjQG4Ajm3aVDCBteXAcc5udQysPRNY+862dcd5N7D2+22VWPtt2Vqv9W8ArhUKDwM54EyX5MrAm4HrnmiTu+4JRN5A9betYFX9QsAG1u4GGABohuFjAqgxP291yBWLbwWOMwjMBK7bYplGdS7r+69txcdUfwhFUNgDXBnYcBhChHQ8fq1LBeR8/9WK666q6iyAwKcjvv9K1yluNH5ncBARybSPyIhEAH81m31JR5+m7QAR/AmQVN3VDVm29gNVnVX4CJGTCi9XHOdj7SY1yeQuAFW9Dhs9iEXRhcgYJIomgcVOfMVx3lZ4HdW5nO9PC+hGL6YrrruG58104kORdckQudiuYHh5eYH12/LMtoxEJhE5me0485znzYjI+6q6dztcDisURz1vU6KUHWc2sFZ7iVY/VnHdA4G1Wnac4+2ArY9aJpNaTaevKDSiMHz8bqe5nMs9IPH4PJDsKhWZWu22GDMlkDOx2DdFx9nZL3nRcXZKIvEVkI1Enm6RbwoAkF1aOieqUwL7BkQuVPL5/XciD8bHJ+Mi86hOiupzY573S+d+13tfcd0DGkWnEckqfAd8HoXhuciY6moyqfc1GsOhyEFgSuBJoCwiz2c976etXHd6Mo+yroy9nswSIqcSN29+kqnVbncD9DW5VwuFR6Jmcw+QUZFI1ofo16zvL/Tjf0/tX9Vea9MJtoEoAAAAAElFTkSuQmCC"
+            alt="" (click)="removeImage(i)" class="remove-image h-25">
+          <img class="camera-img" [src]="'data:image/jpeg;base64,'+item">
+        </ion-col>
+      </ion-row>
+    </div> -->
+  <!-- <input type="file" id="cameraInput" #cameraInput accept="image/*" style="display: none;"   multiple (change)="onFileChange($event)"> -->
+  <ion-fab class="main" horizontal="end">
+    <!-- <ion-fab-button color="warning" class="mb-2" [disabled]="isButtonDisabled()" (click)="litigationIssue()">
+                <ion-icon name="cube-outline"></ion-icon>
+            </ion-fab-button> -->
+            
+    <!-- <b class="mandatory-btn top-117px">*</b>
+    <ion-fab-button color="primary" class="mb-2 margin-inline-start"
+      [disabled]="utilService$.isOnline ?  !(this.installBaseListDetailsPart && this.installBaseListDetailsPart.length) && !(this.installBaseListDetailsServices&& this.installBaseListDetailsServices.length) || isButtonDisabled() || (currentStop.XFINTIME_0 !== '') : isButtonDisabled()"
+      (click)=" captureImage()"> 
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVEiJ1ZXPi01xGMY/7xjya6aRjMKCBTZ2zJDQNLkpC0p2/oExJMrNwn4Wxo+FlZqNpBSxnkQpCtNYsKA0rKwkYqaZuYaPxTnD6c455447G57N6Zzn+T7P+3a+3/cL/zuijFQXAaeA/cCSOroG3AeuRsSPIo+WBgVcAi4D63O4DcAVYLCBRz7UDnVKHSrRDKWajiJNpMKVwDlgB9CacquA7UB3RIwUBHQBz4FR4HP6eQYYAS5ExHioATwE9gBPgamMxzugLyIsCAjgGrAp83kpsAt4BFRQt5qgr6hNtUXtVU+qZ9SKurhE3596bkHtSV96CsT71NfOxZjam9GtVm+mz9+epbtIrQDDJP/qMNAOtAFHgGlgWD2QXZJnktuBulx9r75S23LWtasv1A/qiiLPsg4OAhuB4xHxrZ6MiK/AaWAdcKjIpCxgN/AFeFKieQxMAl3NBADUirYoQET8BMbLfMoC3gKd6uYiQcqtAd40E3CH5NANpAcqDwPABHD7rwMi4iNQBY4C19W1mco71Rspdz4iPhWWOY+DdlatqdPqS3VU/a5OqtVGnq15grpOLqr3gGPANpJ74S5wKyLGGq3PzqL+huJ5Qj0xO4tmp+kDYC/wjGRfLwTLgJ2k0zR7H1SBbv7cB81ihqTQwYiYWKDXP4BftIRgCl6FF0oAAAAASUVORK5CYII="
+        alt="" class="h-25">
+    </ion-fab-button> -->
+    <b class="mandatory-btn top-51px">*</b>
+    <ion-fab-button color="primary" class="mb-2 margin-inline-start"
+    [disabled]="utilService$.isOnline ?  !(this.installBaseListDetailsPart && this.installBaseListDetailsPart.length) && !(this.installBaseListDetailsServices&& this.installBaseListDetailsServices.length) || isButtonDisabled() : isButtonDisabled()"
+    [ngClass]="isDisabled ? 'pointer-none' : ''" (click)="addSignature()">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADiSURBVEiJ7ZExTgJRFEXPZw0zDYWdW3ADFEpiZYWdpXELrEQaF0DYgM0khA04jZ2J1hYECiImHJo/yTih8n+6ue1LzrnvPcgYtVAX6lZdqZc54aVa+zernIKJeugINoMM4EJdAh/AE2Br/JrKR53Htmv1Sn2Mm9RqkQIu1ak6VN87kolapsKbhz53JMt/g0/Am8yiZJ6zeTfTczRv8pbjoT28h/fwlKhjdX8O+EC9AA7APfDbmtXAKITwnSJAfVB/1Fv1Lm6SfpaW4CWeY6deqzfZ4EBQK+ATqIAqhPCVCw5wBDCyi/+dMKBZAAAAAElFTkSuQmCC"
+        alt="" class="h-25">
+      <!-- <ion-icon name="pencil-outline"></ion-icon> -->
+    </ion-fab-button>
+    <ion-fab-button color="primary" class="mb-2 margin-inline-start"
+    [disabled]="utilService$.isOnline ?  !(this.installBaseListDetailsPart && this.installBaseListDetailsPart.length) && !(this.installBaseListDetailsServices&& this.installBaseListDetailsServices.length) || isButtonDisabled() : isButtonDisabled()"
+    [ngClass]="isDisabled ? 'pointer-none' : ''" (click)="addNote()">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFzSURBVEiJxZa9Lm1BGIafV4g4iQgqnEIhEjtKcQUkFApRUyhO4Q4UonMHQoGCQiEUQkSiwgUozg5xA+IKJP5ehZGMba3Za/mJt5k1+b55nzX/A5FsV2yf2753fd3aXrDdQEKqAVwBD8BqKPPUDSyG7y1gVtJjCoTtnvBnE8nE19zBkLts+8H2nu3mrNy4ey2hvKsHiLQNTALjwJHt1hTgU5J0EABDwIntju8AvPVyyvY/oB/YBYaBjcwWtvvCuI7Uc7ct25u2HzNW17Pt9i/1QJIlzUhqVCRglNeV2fklQBk15gVszwO9BX0OJe2XAgAVYKAg4CIvkAuQNF3QPKlfnYNjoK+gz7qkpVIAYKcE4CwvkJqDtYLmSaWGqI1owwA3ksochGkA8B/4G9UPgLpHeRnAGNAV1a/LmicBkqpA9TOmsX58H8SAtwlsyUosqD81Xh8u/UvgCVghfelnqQmYAySpkpkRni2nBZ8ttboPbd8dkC/3aQNMfSjXiQAAAABJRU5ErkJggg=="
+        alt="" class="h-25">
+      <!-- <ion-icon name="document-text-outline"></ion-icon> -->
+    </ion-fab-button>
+    <!-- <b class="mandatory-btn top-180px" *ngIf="isRequired">*</b>
+    <ion-button color="primary" class="mb-2 margin-inline-start" (click)="goToCaptureDetail()">
+      <ion-text class="fs-14 fw-900">Customer Survey</ion-text>
+    </ion-button> -->
+    <!-- <ion-button color="primary" class="mb-2 margin-inline-start" (click)="goToCaptureDetail()"
+            *ngIf="currentStop.Mandatory != 2">
+            <ion-text class="fs-14 fw-900">Customer Survey</ion-text>
+        </ion-button> -->
+  </ion-fab>
+  <div class="sign-view" *ngIf="signPageData?.signature">
+    <img class="sign-img p-5" [src]="signPageData.signature">
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="tertiary">
+    <ion-button color="success" expand="block"
+      [disabled]="isButtonDisabled() || !areAllImagesUploaded()  || !signPageData.signature"
+      (click)="serviceCreation()">
+      <b> {{'STOP.CONFIRM'| translate}}</b>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="from === 'normal'"></ion-back-button>
+      <ion-back-button *ngIf="from === 'history'"
+        [defaultHref]="'/stop-detail?stop='+detailDetId+'&from=history'"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'COMMON.SERVICE_DETAILS' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <ng-container *ngIf="documentDetails.length > 0">
+    <ion-item lines="full">
+      <ion-icon slot="start" name="ticket-outline"></ion-icon>
+      <ion-label>
+        <h2>
+          <span *ngIf="documentDetails[0].XDOCTYP_0 == 1">{{ 'COMMON.SERVICE_REQUEST' | translate }}</span>
+          <span *ngIf="documentDetails[0].XDOCTYP_0 == 2">{{ 'STOP.CUSTOMER_RETURNS' | translate }}</span>
+          <span *ngIf="documentDetails[0].XDOCTYP_0 == 3">{{ 'STOP.PRE_RECEIPT' | translate }}</span>
+        </h2>
+        <ion-text color="medium">
+          <p>{{ documentDetails[0].XDOCNUM_0 }}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <ion-label>
+        <h2>
+          <span *ngIf="documentDetails[0].XDOCTYP_0 !== 3">{{ 'STOP.CUSTOMER' | translate }}</span>
+          <span *ngIf="documentDetails[0].XDOCTYP_0 == 3">{{ 'STOP.SUPPLIER' | translate }}</span>
+        </h2>
+        <ion-text color="medium">
+          <p>{{ documentDetails[0].XBPCORD_0 }} - {{ documentDetails[0].XBPNAME_0 }}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-icon slot="start" name="calendar-outline"></ion-icon>
+      <ion-label>
+        <h2>{{ 'STOP.DATE' | translate }}</h2>
+        <ion-text color="medium">
+          <p>{{ documentDetails[0].XDLVDAT_0 | date: "MM-dd-yyyy"}}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-icon slot="start" name="copy-outline"></ion-icon>
+      <ion-label>
+        <h2>
+          <span *ngIf="documentDetails[0].XDOCTYP_0 !== 3">Component Details</span>
+        </h2>
+        <ion-text *ngFor="let item of partsDetails" >
+          <ion-row>
+            <ion-col size="6">
+              <p class="mt-1">{{ item.Item_code }} - {{ item.Item_description }}</p>
+            </ion-col>
+            <ion-col size="6">
+              <p class="mt-1 ion-justify-content-end d-flex">{{ item.Quantity }} - {{ item.Unit }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <!-- <ion-item lines="full" (click)="notesModal(documentDetails[0])">
+      <ion-icon slot="start" name="document-outline"></ion-icon>
+      <ion-label>
+        <h2>{{ 'STOP.NOTES' | translate }}</h2>
+        <ion-text color="medium">
+          <p>{{ documentDetails[0].TEXTE1_0 }} {{ documentDetails[0].TEXTE2_0 }}</p>
+        </ion-text>
+      </ion-label>
+      <ion-icon size="small" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item lines="full" *ngFor="let item of documentDetails">
+      <ion-label>
+        <h2>{{ item.ITMREF_0 }}</h2>
+        <div class="d-flex justify-content-between pt-1">
+          <ion-text color="medium">
+            <p>{{ item.DES_0 }} {{ item.SAU_0 }}</p>
+          </ion-text>
+          <p>{{ 'STOP.QTY_SHORT' | translate }}: {{ item.QTY_0 }} {{ item.SAU_0 }}</p>
+        </div>
+      </ion-label>
+    </ion-item> -->
+  </ng-container>
+</ion-content>

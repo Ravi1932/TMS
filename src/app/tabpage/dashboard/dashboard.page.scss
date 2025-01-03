@@ -1,0 +1,39 @@
+.summary-header {
+    background: var(--ion-color-dark);
+
+    .overall-status {
+        width: 180px;
+        height: 180px;
+        margin: 15px auto;
+    }
+
+    .pickup-drops {
+        background: var(--ion-color-primary);
+
+        ion-card-title,
+        ion-card-subtitle {
+            color: var(--ion-color-tertiary);
+        }
+    }
+}
+
+.today-job-status {
+    background: var(--ion-color-dark);
+    border-radius: 8px;
+    padding: 8px;
+    color: var(--ion-color-tertiary);
+
+    h2 {
+        font-weight: 600;
+        font-size: 18px;
+
+        span {
+            color: #24a859;
+        }
+    }
+
+    ion-col:nth-child(2) {
+        border-left: 1px solid var(--ion-color-tertiary-shade);
+        border-right: 1px solid var(--ion-color-tertiary-shade);
+    }
+}

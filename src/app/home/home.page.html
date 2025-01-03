@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      FSM for Sage X3
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-card [routerLink]="['/tabs']">
+    <ion-card-content class="ion-text-center">
+      <img src="assets/images/route.png" width="40px" class="ion-margin-bottom">
+      <ion-text>
+        <h2><b>Scheduled Services</b></h2>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card [routerLink]="['/service-request']">
+    <ion-card-content class="ion-text-center">
+      <img src="assets/images/request.png" width="40px" class="ion-margin-bottom">
+      <ion-text>
+        <h2><b>Create Service Request</b></h2>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

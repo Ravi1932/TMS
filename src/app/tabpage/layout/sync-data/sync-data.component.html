@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div class="d-flex ion-align-items-center" (click)="goTo()">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{'SCHEDULED.SYNC_DATA'|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="light">
+  <ion-card class="p-5">
+    <ion-card-content class="p-2 fs-16 fw-600">
+      <ion-row>
+        <ion-col size="8"><ion-text>{{'ADMIN.SITE'|translate}}</ion-text></ion-col>
+        <ion-col size="4" class="ion-justify-content-center d-flex">
+          <ion-button class="btn btn-sm p-0 m-0" color="primary" (click)="getSite(1)" *ngIf="!isSite">{{'SCHEDULED.SYNC_NOW'|translate}}</ion-button>
+          <ion-checkbox *ngIf="isSite" checked [disabled]="isSite"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8"><ion-text>{{'STOP.CUSTOMER'|translate}}</ion-text></ion-col>
+        <ion-col size="4" class="ion-justify-content-center d-flex">
+          <ion-button class="btn btn-sm p-0 m-0" color="primary" (click)="getCustomer(1)" *ngIf="!isCustomer">{{'SCHEDULED.SYNC_NOW'|translate}}</ion-button>
+          <ion-checkbox *ngIf="isCustomer" checked [disabled]="isCustomer"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8"><ion-text>{{'ADMIN.ADDRESS'|translate}}</ion-text></ion-col>
+        <ion-col size="4" class="ion-justify-content-center d-flex">
+          <ion-button class="btn btn-sm p-0 m-0" color="primary" (click)="getAddress(1)" *ngIf="!isAddress">{{'SCHEDULED.SYNC_NOW'|translate}}</ion-button>
+          <ion-checkbox *ngIf="isAddress" checked [disabled]="isAddress"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8"><ion-text>{{'SCHEDULED.INSTALL_BASE'|translate}}</ion-text></ion-col>
+        <ion-col size="4" class="ion-justify-content-center d-flex">
+          <ion-button class="btn btn-sm p-0 m-0" color="primary" (click)="getInstallBase(1)" *ngIf="!isInstallBase">{{'SCHEDULED.SYNC_NOW'|translate}}</ion-button>
+          <ion-checkbox *ngIf="isInstallBase" checked [disabled]="isInstallBase"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8"><ion-text>{{'SCHEDULED.SKILL_GROUP'|translate}}</ion-text></ion-col>
+        <ion-col size="4" class="ion-justify-content-center d-flex">
+          <ion-button class="btn btn-sm p-0 m-0" color="primary" (click)="getSkillGroup(1)" *ngIf="!isSkill">{{'SCHEDULED.SYNC_NOW'|translate}}</ion-button>
+          <ion-checkbox *ngIf="isSkill" checked [disabled]="isSkill"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8"><ion-text>{{'TAB.ROUTES'|translate}}</ion-text></ion-col>
+        <ion-col size="4" class="ion-justify-content-center d-flex">
+          <ion-button class="btn btn-sm p-0 m-0" color="primary" (click)="getRoutes()" *ngIf="!isRoutes">{{'SCHEDULED.SYNC_NOW'|translate}}</ion-button>
+          <ion-checkbox *ngIf="isRoutes" checked [disabled]="isRoutes"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-justify-content-center d-flex">
+    <ion-button shape="round" expand="block" (click)="allSync()">{{'SCHEDULED.SYNC_ALL'|translate}}</ion-button>
+  </div>
+  <div class="ion-justify-content-center d-flex" *ngIf="currentDate">
+    <ion-text class="fs-16">Last Sync : {{currentDate}}</ion-text>
+  </div>
+</ion-content>

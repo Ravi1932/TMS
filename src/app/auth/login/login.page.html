@@ -1,0 +1,79 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" [routerLink]="['/configuration']">
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <div class="language-selection my-3 text-right">
+    <div class="d-inline-block mr-4">
+      <img src="assets/images/en.png" alt="en" class="mr-2 " (click)="languageChange('en')"
+        [ngClass]="{'selected': login.lang=='en'}">
+      <img src="assets/images/fr.png" alt="fr" (click)="languageChange('fr')"
+        [ngClass]="{'selected': login.lang=='fr'}">
+    </div>
+  </div>
+  <div class="form-section my-5 py-5">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <div class="auth-logo app-heading-logo ion-text-center logo-light">
+          <img src="assets/images/logo.png" width="300" alt="pod">
+        </div>
+        <div class="auth-logo app-heading-logo ion-text-center logo-dark">
+          <img src="assets/images/logo_dark.png" width="300" alt="pod">
+        </div>
+        <div class="ion-justify-content-center d-flex mt-3">
+          <h2 class="fs-20 fw-600 ls-2">PILOT</h2>
+        </div>
+        <ion-grid class="ion-no-padding my-3">
+          <form #loginForm="ngForm" novalidate class="px-4" (ngSubmit)="onLogin(loginForm)">
+            <ion-label position="stacked">{{"COMMON.LBL_TECHNICIANID" | translate}}</ion-label>
+            <ion-item class="ion-no-padding">
+              <ion-input [(ngModel)]="login.driverId" placeholder="{{'LOGIN.PLACE_ID' |translate}}" name="username"
+                type="text" #username="ngModel" required>
+              </ion-input>
+            </ion-item>
+            <ion-text *ngIf="submitted && username.invalid">
+              <p class="error-msg" *ngIf="username.invalid && username.errors.required">
+                {{"ERROR_MSG.DRIVER_REQ" |translate}}
+              </p>
+            </ion-text>
+            <div class="mt-2">
+              <ion-label position="stacked">{{"LOGIN.LBL_PASSWORD" | translate}}</ion-label>
+              <ion-item class="ion-no-padding">
+                <ion-input [(ngModel)]="login.password" placeholder="{{'LOGIN.PLACE_PASS' |translate}}" name="password"
+                  type="password" #password="ngModel" required>
+                  <!-- minlength="4" -->
+                </ion-input>
+              </ion-item>
+              <ion-text *ngIf="submitted && password.invalid">
+                <p class="error-msg" *ngIf="password.invalid && password.errors.required">
+                  {{"ERROR_MSG.PASSWORD_REQ" |translate}}
+                </p>
+              </ion-text>
+            </div>
+            <!-- <ion-text *ngIf="submitted && password.touched ||password.invalid">
+              <p class="error-msg" *ngIf="password.invalid && password.errors?.minlength">
+                Please enter 4 character long password
+              </p>
+            </ion-text> -->
+
+            <ion-button shape="round" expand="block" class="my-4" type="submit">{{'LOGIN.BTN_LOGIN'|translate }}
+            </ion-button>
+          </form>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p class="ion-text-center w-100 mt-2">
+      Copyright &copy; 2022-24, Powered by <img src="assets/images/tbs-logo.png" width="40px" alt="">
+    </p>
+  </ion-toolbar>
+</ion-footer>

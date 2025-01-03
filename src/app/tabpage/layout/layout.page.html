@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{'DASHBOARD.DASHBOARD'|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-row class="p-20" style="background: #132c33;">
+    <ion-col size="3" class="d-flex align-items-center justify-content-center">
+      <ion-avatar class="dashboard-avatar logo-light">
+        <img src="assets/images/avatar.png" class="object-fit-cover">
+      </ion-avatar>
+      <ion-avatar class="dashboard-avatar logo-dark">
+        <img src="assets/images/avatar_dark.png" class="object-fit-cover">
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="9" class="w-100">
+      <ion-card class="m-0 ml-2">
+        <ion-card-content class="p-2">
+          <table class="table table-sm table-borderless font-weight-bold mb-0 fs-12">
+            <tr>
+              <th>{{ 'DASHBOARD.TECHNICIAN' | translate}}:</th>
+              <td width="70%" *ngIf="userDetail">{{userDetail[0].XUSER_0}} - {{userDetail[0].Name}}
+              </td>
+            </tr>
+            <tr>
+              <th>{{ 'DASHBOARD.ROUTE_NUMBER' | translate}}:</th>
+              <td width="70%" *ngIf="statusList">{{statusList[0]?.RouteNumber}}</td>
+            </tr>
+            <tr>
+              <th>{{ 'DASHBOARD.STATUS' | translate}}:</th>
+              <td width="70%" *ngIf="statusList">{{statusList[0]?.Status}}</td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row class="p-20">
+    <ion-col size="12">
+      <ion-card class="m-0 h-170" (click)="goTo('/tabs/routes')">
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/route.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/route_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <ion-text>
+            <h2><b class="fw-900 fs-18">
+                {{'DASHBOARD.MY_ROUTES'|translate}}</b></h2>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <!-- <ion-col size="12" class="mt-2">
+      <ion-card class="m-0 h-170" (click)="goTo('/tabs/layout/scheduled-service-order')">
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/request.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/request_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div>
+            <ion-text>
+              <h2><b class="fw-900 fs-18">
+                  {{'SCHEDULED.SCHEDULED_SERVICE'|translate}}</b></h2>
+            </ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col> -->
+     <!-- <ion-col size="12" class="mt-2">
+      <ion-card class="m-0" (click)="goTo('/tabs/route-settlement')">
+        <ion-card-content class="ion-text-center">
+          <div class="logo-light">
+            <img src="assets/images/arrows.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div class="logo-dark">
+            <img src="assets/images/arrows_dark.png" width="50px" class="ion-margin-bottom">
+          </div>
+          <div>
+            <ion-text>
+              <h2><b class="fw-900 fs-18">
+                  {{'ROUTE_SETTLEMENT.ROUTE_SETTLEMENT'|translate}}</b></h2>
+            </ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>  -->
+  </ion-row>
+</ion-content>

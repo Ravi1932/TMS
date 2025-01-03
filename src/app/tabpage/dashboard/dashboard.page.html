@@ -1,0 +1,76 @@
+<ion-content color="tertiary">
+  <ion-row class="summary-header p-5">
+    <ion-col size="12">
+      <div class="overall-status">
+        <circle-progress [percent]="progress"></circle-progress>
+      </div>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card class="pickup-drops m-5">
+        <ion-card-header class="ion-text-center p-5">
+          <ion-card-title>{{ totalDrops }}</ion-card-title>
+          <ion-card-subtitle>{{'DASHBOARD.TOTAL_DROPS' |translate}}</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+      <ion-card class="pickup-drops m-5">
+        <ion-card-header class="ion-text-center p-5">
+          <ion-card-title>{{ totalPickups }}</ion-card-title>
+          <ion-card-subtitle> {{'DASHBOARD.TOTAL_PICKUP' |translate}}</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-list-header>
+    <ion-label class="fs-18"> {{'DASHBOARD.TODAY_LBL' |translate}}</ion-label>
+  </ion-list-header>
+  <ion-grid class="ion-padding-start ion-padding-end">
+    <ion-row class="today-job-status">
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <h2>{{ todayTotalDrops }}</h2>
+          <p>{{'DASHBOARD.DROPS' |translate}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <h2>{{ todayTotalPickups }}</h2>
+          <p> {{'DASHBOARD.PICKUP' |translate}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <h2>0</h2>
+          <p>{{'DASHBOARD.ON_TIME' |translate}}</p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list-header>
+    <ion-label class="fs-18"> {{'DASHBOARD.TRIP_SUMMARY' |translate}}</ion-label>
+  </ion-list-header>
+  <ion-grid class="ion-padding-start ion-padding-end">
+    <ion-row class="today-job-status">
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <h2><span>15</span>/250</h2>
+          <p>{{'DASHBOARD.KM' |translate}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <h2><span>4</span>/8.5</h2>
+          <p>{{'DASHBOARD.HOURS' |translate}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="ion-text-center">
+          <h2><span>{{ completeStops }}</span>/{{ totalStops }}</h2>
+          <p> {{'DASHBOARD.STOPS' |translate}}</p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

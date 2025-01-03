@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div class="d-flex ion-align-items-center" (click)="goTo()">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>
+      {{'STOP.RESCHEDULE'|translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="tertiary">
+  <form #rescheduleForm="ngForm" novalidate (ngSubmit)="onReschedule(rescheduleForm)">
+    <ion-row>
+      <ion-col>
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.CHOOSE_REASON'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full">
+          <ion-label>{{'STOP.SELECT_REASON'| translate}}</ion-label>
+          <ion-select [(ngModel)]="reschedstopModel.reason" value="brown" okText="Okay" cancelText="Dismiss" name="reason" #reason="ngModel" required>
+            <ion-select-option *ngFor="let item of rescheduleReson" [value]="item.ReasonCode">{{ item.Reason }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-text *ngIf="submitted && reason.invalid">
+          <p class="error-msg" *ngIf="reason.invalid && reason.errors.required">
+            {{"STOP.SELECT_REASON_MSG" |translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.COMMENT'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full">
+          <ion-textarea [(ngModel)]="reschedstopModel.comment" name="comment" #comment="ngModel" placeholder="Enter here..." rows="4" required></ion-textarea>
+        </ion-item>
+        <ion-text *ngIf="submitted && comment.invalid">
+          <p class="error-msg" *ngIf="comment.invalid && comment.errors.required">
+            {{"STOP.REASON_RESCHEDULE" |translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.RESCHEDULE_DATE'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full" class="mt-2">
+          <ion-label>{{ 'COMMON.SELECT_DATE' | translate }}</ion-label>
+          <ion-datetime style="padding-inline-start:0px" [(ngModel)]="reschedstopModel.date" #date="ngModel" name="date" display-format="DD.MM.YYYY"
+            required></ion-datetime>
+        </ion-item>
+        <ion-text *ngIf="submitted && date.invalid">
+          <p class="error-msg" *ngIf="date.invalid && date.errors.required">
+            {{'STOP.SELECT_DATETIME'| translate}}
+          </p>
+        </ion-text> 
+      </ion-col>
+    </ion-row>
+    <ion-button type="submit" color="warning" expand="block" shape="round" class="mt-3">
+      {{'STOP.RESCHEDULE'| translate}}
+    </ion-button>
+  </form>
+</ion-content>

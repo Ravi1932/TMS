@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button *ngIf="!isFromHistory"></ion-back-button>
+      <ion-back-button *ngIf="isFromHistory" [defaultHref]="'/history'"></ion-back-button>
+    </ion-buttons> -->
+    <div class="d-flex ion-align-items-center" (click)="goTo()">
+      <ion-icon class="fs-22" name="chevron-back-outline"></ion-icon>
+      <span class="fs-18">Back</span>
+    </div>
+    <ion-title>{{ stopsDetails[0]?.XDOCNUM_0 }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- <ion-buttons slot="end">
+      <ion-button
+        (click)="presentPopover($event, stopsDetails[0]?.XDOCNUM_0, stopsDetails[0]?.XBPNAME_0, stopsDetails[0]?.XBPCORD_0)">
+        <ion-icon class="fs-20" slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tertiary">
+  <div id="detailMapCanvas" class="map-section"></div>
+  <ion-item color="primary" lines="none" *ngFor="let item of stopsDetails"
+    [routerLink]="['/tabs/stop-list/stop-detail/document-detail']"
+    [queryParams]="{document: item.XDOCNUM_0, from: isFromHistory ? 'history' : 'normal'}">
+    <!-- <ion-icon slot="start" name="document-text-outline"></ion-icon> -->
+    <img
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFzSURBVEiJxZa9Lm1BGIafV4g4iQgqnEIhEjtKcQUkFApRUyhO4Q4UonMHQoGCQiEUQkSiwgUozg5xA+IKJP5ehZGMba3Za/mJt5k1+b55nzX/A5FsV2yf2753fd3aXrDdQEKqAVwBD8BqKPPUDSyG7y1gVtJjCoTtnvBnE8nE19zBkLts+8H2nu3mrNy4ey2hvKsHiLQNTALjwJHt1hTgU5J0EABDwIntju8AvPVyyvY/oB/YBYaBjcwWtvvCuI7Uc7ct25u2HzNW17Pt9i/1QJIlzUhqVCRglNeV2fklQBk15gVszwO9BX0OJe2XAgAVYKAg4CIvkAuQNF3QPKlfnYNjoK+gz7qkpVIAYKcE4CwvkJqDtYLmSaWGqI1owwA3ksochGkA8B/4G9UPgLpHeRnAGNAV1a/LmicBkqpA9TOmsX58H8SAtwlsyUosqD81Xh8u/UvgCVghfelnqQmYAySpkpkRni2nBZ8ttboPbd8dkC/3aQNMfSjXiQAAAABJRU5ErkJggg=="
+      alt="">
+    <ion-label class="ml-2">{{'COMMON.SERVICE_DETAILS'| translate}}</ion-label>
+  </ion-item>
+  <ion-card class="m-3" *ngFor="let item of stopsDetails">
+    <ion-card-content class="py-2">
+      <ion-item lines="none" class="ion-no-padding">
+        <!-- <ion-icon slot="start" name="home-outline" color="primary" class="fs-20"></ion-icon> -->
+        <div class="logo-light">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH6SURBVEiJvZQ/aBNhGIef9xJNaejmYIsgNJPTdeji1mTSxUVa0OZCltbBUQr+gea7c1NcilBakEoukwWh4CqpSIfglsEWhIoOgqDiH7AVTF6HJKYhudw1EX/T3e+793nuuLtPiBrXmQUeACcRlln216OMxSLBPScP+MALVHdB7pCxDyhXd4YXeE4e5RHKY0hlMStPmbHjwF3S9m+2qy8HF3TCFzCmDsB2tcyMHUcwYZJgQRC8lYiS3oIw+DEk3YKo8IiSTsFx4REkbcGg8BBJ7J/A+0hiuNnLICVgA1KLA8OPStJ2AiiQsT/GSE9tgVTQ1NWh4W3Jc9JTZ4HrVrMagf1pzPyZoeEmfxrjTCP1MQALWAI9j2gFsfZ4MhttfwqK1CoIr1C5BHrDolDcInE4geIBSV5H3ACDM4bKQ07IBIXSRhyAm5vf8HLvUO094uaWgAXQU83mK2iJc79c5jZr3U+hH7jtfwaIh96Pm70Ceg9lHdH9RmmNA7fYG/kErPQbDxeoXECoYPxrnWJnErgYJrD6LTau0FGEHz1WvqMkQ8dDBUPmPwq0ftA4SI4OTGv8QwnQn62q/ZLV2kH0EKvm4+aeIc1vVplE+BKAHMdzFv+e7ZIBEqhV7haY4ntcZw7lPugqirTlstrN1jcg8yhrR8q3iOQpFKut4g/1VPERnDXC0AAAAABJRU5ErkJggg=="
+            alt="" width="20">
+        </div>
+        <div class="logo-dark">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJxQTFRFAAAAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAzDIcdgAAADR0Uk5TAC8/VTYBd/3+gNL/tgmmu6XZGcmZZWSI4fxwafpT9PFUs7lQ7lJ7RdbbSe8HA9+6silmS3yMMWwAAACcSURBVHicY2RAA4xw+j8DEyPjH6gAKyMQ/AGSXyACvIx/WRiA/F9QASHGH5yMIFkGiACjOCPj3y8MnOyM78ECsiD9r4AKgeK/2G8zqj3iFGN8DDZajvH5dzlGpbdibA+gdiv8eiXMqMN4/z/CVYr/gYbyAAWUXzKI34XZAhJQucigfwengMFtuIDqBZCAIchxZxmMgQr/n4f7Fg4AKx4xhR3FsT8AAAAASUVORK5CYII="
+            alt="" width="20">
+        </div>
+        <ion-text class="ml-2">
+          <p class="fs-16">
+            {{ item.XBPCORD_0 ? item.XBPCORD_0 + '-' : '' }} {{ item.XBPNAME_0 }}
+          </p>
+        </ion-text>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <!-- <ion-icon (click)="tel()" slot="start" name="call-outline" color="primary" class="fs-20"></ion-icon> -->
+        <div class="logo-light">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMWSURBVEiJpZVdaBxVGIafbyaS9kK9saSgFbGiROnuFhVFazuzEfwFaWQDYnaDrehFkKgFL1SyZxuVeCNtaUoNgmV3CcWiloK4anEOQahoJd2JtrbUmouAYmwFc9HGNvN5sWbjulmtk/fyPN95H87MYUZYyHsZlxMrhoBngRlUn8eUKywz7mL5yhKwGegH/RWREfzUKWz1u+UJFOH924tAGnV9THEcGwakU2dBR0knThKEsSUubvYZkH7UvQ+z7/s6Capf4yfPgYzipU5gq8fjCByULQjDDeULyZdGEF5CdB8md308AdyAautHMFjaAZzFYUNcwSzoVS0nCr2PA6uJOBpPIISoc/eS1GS7QcYQeQFTPBVPoFQQfRhFGsj2vnsR9iO6jcHinjjlNcEVbQeBaynkuhqIzq8GzhO1j8UtrwlefncGdD+ObmsgnXMHgWnk4mvLEwA40esoXRRyfp30HJhHo62gT//1omOl9qkIJs/hJ1cBz9G96R0+/moeADs5TTo5C7IHL3kEG/4YTwDw0B1fcCka4ML5Dmz4WX09CL/ET7QjshNvXYCdnG5qGeq9BS91P17nb9hvZ5cWHJ74Ay9xDJERvEQVG56sMxsG+KkORHaRTv1EUJ2os0LvACofAh7SNoCfmMCGPzQLakVTpJNz4LyFt76CPfbzIqtW8JO/ALvxU2t54LZxNqb6QYZRnsCUtuKvawfZjZf4BhueBv5x9wEUoZDdi/AYqhsw5dMNfHtuPaplYA3QjmoGUz60yLOvoryC6mZMudIsgNr/4fjKMUTvQeURTDFs4MZrQ67LIM4Ug8UjTfsXJV1LC+ola/YCGaCHfOmTlrNLpZDdBdzlthywUxE2PISfdIFR/MSVdG8ar1/h/0o62QE82voEf4/p24hERZDfUV7EFA//+/yTtyJOgOjOyxMADGeuZm5FHuhH+JxI38SUbXN57mZELein6E1bLl+wkKG+tURRHugBzgAfoHoUx52B6E6UPPARnRf66Dkw//8FC3njqVVcvNSL6IOoJIBrgDOIvE104w6MiQD+BCgfJiTBAcT1AAAAAElFTkSuQmCC"
+            alt="" (click)="tel()" width="20">
+        </div>
+        <div class="logo-dark">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAANJQTFRFAAAAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAPU0l2wAAAEZ0Uk5TABnA210XzUELu2OrRwpa0A/XAaUzV0afecUgDdQmRLUyG45wPs8rp1EHLc5vvmLCWBYMfVRSxmQQm68fucqSRcsCTanMqmITHmQAAACsSURBVHicRc7dB8JgFAbw55FlfSl9TBlbEqm7IrpLf/wuIuomKhKLLNbWx0oxalv1vs/Fcfw4j0MwSggRKjHwISHHAIVQuQooXqJZoi8h5QHZzElAhS5qwfspQOMRdTiyFA0edHIvweDNa/rlnQC0uEWb3KjmPb+KoXtWbPTi92yTiwjQX/KFATmDXk0zuRty+m0YrROA2ieteDEM/sq1Dl3HG9P6AyZJpzv/AHGdKpiTynyvAAAAAElFTkSuQmCC"
+            alt="" (click)="tel()" width="20">
+        </div>
+        <ion-text class="ml-2">
+          <p class="fs-16">{{ item.MOB_0 }}</p>
+        </ion-text>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <!-- <ion-icon (click)="mail()" slot="start" name="mail-outline" color="primary" class="fs-20"></ion-icon> -->
+        <div class="logo-light">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAImSURBVEiJ7ZXPThNRFIe/c2dYGNCgGzRigilN/PMArNC2ujE+QYGWsjTqxoQVVm9T2LqBxC1Y/vgEutEOQmLiA1hNcMECNWx0ISYQZ+5xQalUihTsyvjbzZyZ77vnzplc+J8DIihCIXsT4SI40xqsceAqPJh9JhQyU8Dt1oD3ZNIHctWL9/iaYmz2818hJ4bOEEoZuACMGKAd1UfAcUJZZDx79ujwdBehvABOApNAx/aeG1nBREmgnYjgSJKJdBehXwZOoS6FUAH49VHz81WJHju0xOZO1+CGFHauslOqn5r8/Arq9YO2ERFgB7ubgktUBk6g2k++9G53ee9Y2ulV1EuCtiFmGZvraQLegWoSO/vh90caz72dXsWLEoAiUdBQYge7kWgZ6MCYhvD9BfXpQaJFipnztTvjI+cQEwC9B73cWFAcjhF5y0CEmqsAOF5TyI5SyI4ShW+AtmptC+cCisOx5gR2qBfnAmALdUnszBJ+2IeyCJoHzaO8wg/7sDNLqEvWJHZoT0f1guJAHJEAZBNPEti5NQDGFtaxpTQa60RjndhSmrGF9e0Fza3hSQJkE5GA4kB8N1IoZBThFhK9xHkB8B1PUtx/8nH/nW2Q+h/tGsZcQXm83YHTeA2uP5KHhu906Ycp4AtiyiiXdrZoA5F7wDd8TWCffjo0vE6i14GvwF1gQ7DZSUTvHBn6p6hMVQ+czA1ELrf0wFF9y8PS89bw/un8BOP51ayvGD+5AAAAAElFTkSuQmCC"
+            alt="" width="20" (click)="mail()">
+        </div>
+        <div class="logo-dark">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAGZQTFRFAAAAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAs3jw3AAAACJ0Uk5TAEGXmeztYFXvg8MNCr2Lgr6KxAuBv4niE4QMb+iGwYjrQHpvoxQAAACESURBVHicZc/dCoJAEAXgObkXC1kbbBAVIb3/U0WgJIhpCPaj07TMha3nbr6LmTOgKJiBZDIyw0yFBaxAp3MKvGB791ZJDWorQC55/sQPqCkAbUcRv0BJCs4+1tSu+kZh32zkEvPdFQFO+ORh6cHwVWDHXaVn/RK3uNgR58tf9Wz+XAxfmT8tlxn3QqwAAAAASUVORK5CYII="
+            alt="" width="20" (click)="mail()">
+        </div>
+        <ion-text class="ml-2">
+          <p class="fs-16">{{ item.WEB_0 }}</p>
+        </ion-text>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <!-- <ion-icon slot="start" name="location-outline" color="primary" class="fs-20"></ion-icon>
+         -->
+        <div class="logo-light">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANkSURBVEiJlZVdaJtlFMd/53kTl65zrDDpBGW92ITerPsQvyaS9mbgTQfqxebeWCZuFzJR3CZuNnnSrowxULBs4GCapmkVJpSBCiKjATcYTt0HllnaXWwi60SwdNhmzcfx4k2zNMmb1nP5nPP/OM/XEZaKHvdZChpBpAN4srh6B9VRMAPY5E/14OKbOb67iaw5g8qrHiHfIUwCoGxAeLko+DXq7MMmppcv0LfncXKSBtYi+h6FDSmsLSyqsdZgbkVQPgb+Qp0wNjG1tMBn+4JMzV0EeQKTC9M9POHbJUDv7o0UAmngDutCL7H/TLY8HagC3JvdD7IN5YUSue0KIfm3QbcXfV1CnVPYRIbu4Qns668g5hL3Mm8Bp8vpzCJyRVA5CAyXDq9vVzOS/wXoRWhEaASOIflf6dvV7BkYuozyFaqHKv0uFoh3tQHrUUmW1vKB00ATRrcQTe0gmtqBOluAJnKBU2VUA0ALNrLJX0ByrUVWz/1JtxGlE8HSnRov1dnE7whxYCcn3cYi2MMIrf4CsAYoEBu6D8CcaQEc0JuVrYOOAU6xBmiZAQqINtURMFOAIe4+5smtngTmUXmmmt88BzygMOtdhOBkM2BQuesvIHnvIYm2AfBO/wOUBBAlHmkv1cUj7aAfoXyBPTcPQBYPo3rLX6B76DfgD5DO0lpD8CDIFdALxN1x4u446AWQKzQED5e56wRuExscW+S5qnXrfoLgspL1HBr813OF0BPZiRZeLFb9SCx1HkE9zGurkNBtVBPY1PvldNUPjXw/OAeYlb1Af9GGQnIEGHlopNzmijeB1RDor2Sr/RfFI8Og7YSCT/HB5/dr1izEib2PkslOoPoDNuVWpiuvqRdqjgBrmMseqUsOkMkd9dybo7XSTk1Q+to04bZHEA7TsfkbRq9X/ZIA2D1bEc6inMAOnq9VUrsDz1ofcBPVFLYrVJX+9MAKxCSACXCO+7H4C9hz86jzBrAR8tXt/zMdA21FTASbyPjR1N6ihUhfmyLcFkD4kPDm70lf/xPwxiicBT1GbPDLehT+I3MhvAF0GVjFSrYCMCtXQWdY1/B85YD5/wIAvW4rBX5GSSI4gIuYp4kOjC0Frb9FCzF64286Ns2ARIFtwLvEkt8uC7vsUIQed4QedwRdZufAfy83Jvm+Wa4xAAAAAElFTkSuQmCC"
+            alt="" width="20">
+        </div>
+        <div class="logo-dark">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAOdQTFRFAAAAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAAJkAQzKzIgAAAE10Uk5TAARjxe/uxAMLu681AbCmixeMozDUstwK1S58eIWQkoR6e5hWwi3BV4ZqnmZonGxPqh+fHa1NCeINVeN0mXPgJ1jHAsN1dhXhTNDRlZS/jFHkAAAA0UlEQVR4nE3O/2cCcRgH8Pc70ombbt0vTTGJMlObckZRYon+3X5I+iWz5CYiMzZdi0u/9UW0Oztd97lL9fB4nuf1y/MmvKJfTtgWu9eSOOGGHNcK4IZbxLCBwpUPce4oE3/RjcKlgDsuklzjlvN7zgSkOc3wBwn5O/tvCMjx64GfeOQkvzIFFDh+XqiSmRqV+CFAozN68d4OixFH99+Wl4aIhwrfghyaxL43qq6lB4AaBzbq/J2eogNPag+v73ucoUEDabd7ATTJQwdXgBbbwXIEeDk6EWAPfncAAAAASUVORK5CYII="
+            alt="" width="20">
+        </div>
+        <ion-text class="ml-2">
+          <p class="fs-16">
+            {{ item.XBPAADDLIG_0 }} {{ item.XBPAADDLIG_1 }} {{ item.XBPAADDLIG_2 }} {{ item.XPOSCOD_0 }}
+            {{ item.XCTY_0 }} {{ item.XCRY_0 }}
+          </p>
+        </ion-text>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-row class="px-2">
+    <!-- <ion-col size="6" *ngIf="selectedStop && selectedStop.XSTATUS_0 !== 5 && selectedStop.XSTATUS_0 !== 6">
+      <ion-button color="warning" expand="block" class="mt-0" (click)="skipStop(stopsDetails[0].XDOCNUM_0)">
+        <ion-icon name="arrow-redo-outline"></ion-icon>
+        <ion-label class="pl-1">{{'STOP.SKIP'| translate}}</ion-label>
+      </ion-button>
+    </ion-col> -->
+    <ion-col *ngIf="utilService.isOnline && selectedStop && selectedStop.XSTATUS_0 !== 6" [size]="12">
+      <div class="logo-light">
+        <ion-button (click)="startRoute()" color="secondary" expand="block" class="mt-0">
+          <!-- <ion-icon name="navigate-outline"></ion-icon> -->
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFFSURBVEiJ7dPPK+VRGMfx54t0r7DyB9iMBUMhiylZMcrS1mpKSsnGP6CkKP+DLNlYzEqUldmMjaKpWcxiYkYW5Mf+ZeGob3fQvde9Nuazes55zvP+POdXxH+9pTCI1lpDC/iCnx7UXytwJ1bxF/u4xknpuoYqwMPYioiDiBAR8xHxISK+R8Rqtd22YQbHOExxESM4xQT+oFApuAsrOMcWPuVyj/AhLGG5XGgDRvE1ARbRUbImD2/GGTrLgffgN27TMfxzR3l4Gk9hu9zuC6lgI53pEdYwjpZSeKr5htGyDJ4w7MUCdnCVdjaQyw/iB7KqDErM2nCJYm5uHXOvhueAO/ic4g5coP2lmko/2m5EjKV4OiI2syy7qbzVZ4S+dPGN+IWPNYMngyy9+Vns1RSeM9nAHSbrZTCVPmNTvQwK6K4L/H3qHtCHd3mwjPaPAAAAAElFTkSuQmCC"
+            alt="">
+          <ion-label class="pl-1">{{'COMMON.START_SERVICE'| translate}}</ion-label>
+        </ion-button>
+      </div>
+      <div class="logo-dark">
+        <ion-button (click)="startRoute()" color="primary" expand="block" class="mt-0">
+          <!-- <ion-icon name="navigate-outline"></ion-icon> -->
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFFSURBVEiJ7dPPK+VRGMfx54t0r7DyB9iMBUMhiylZMcrS1mpKSsnGP6CkKP+DLNlYzEqUldmMjaKpWcxiYkYW5Mf+ZeGob3fQvde9Nuazes55zvP+POdXxH+9pTCI1lpDC/iCnx7UXytwJ1bxF/u4xknpuoYqwMPYioiDiBAR8xHxISK+R8Rqtd22YQbHOExxESM4xQT+oFApuAsrOMcWPuVyj/AhLGG5XGgDRvE1ARbRUbImD2/GGTrLgffgN27TMfxzR3l4Gk9hu9zuC6lgI53pEdYwjpZSeKr5htGyDJ4w7MUCdnCVdjaQyw/iB7KqDErM2nCJYm5uHXOvhueAO/ic4g5coP2lmko/2m5EjKV4OiI2syy7qbzVZ4S+dPGN+IWPNYMngyy9+Vns1RSeM9nAHSbrZTCVPmNTvQwK6K4L/H3qHtCHd3mwjPaPAAAAAElFTkSuQmCC"
+            alt="">
+          <ion-label class="pl-1">{{'COMMON.START_SERVICE'| translate}}</ion-label>
+        </ion-button>
+      </div>
+    </ion-col>
+    <ion-col size="12" *ngIf="stopsDetails.length > 0">
+      <ion-button color="dark" expand="block" class="mt-0" (click)="onPODClick(stopsDetails[0].XDOCNUM_0)">
+        <!-- <ion-icon name="checkmark-done-outline"></ion-icon> -->
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC7SURBVEiJ7dOxbQIxGIBRWAJaAg0LZBEqikjZASlT0LBA1sgKGSApaEGKlCowANGjgehy4MOyfRSIv7bfJ1t2p1Nw0MMbvjAraR/xT//npU0cNm3i8N4mvsJDLv4RwNcYXQ/HGHM8oRuBx18LHrGtLFqEIkl3juWZxSeRCHwYOvJ3YNNfJBk/bJ7ityHST8YrkeeGyE8WXjvJLoDVJ+2dR0ayP1FTJA+/ECmDByJl8UpkglcMiuP3uZ3ZA5rG1Y/mRQuSAAAAAElFTkSuQmCC"
+          alt="">
+        <ion-label class="pl-1">{{'COMMON.PROOF_OF_SERVICE'| translate}}</ion-label>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

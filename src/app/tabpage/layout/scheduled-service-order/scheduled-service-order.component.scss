@@ -1,0 +1,23 @@
+.label-stacked.sc-ion-label-ios-h {
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.ws-n {
+    white-space: normal;
+}
+
+ion-input {
+    --padding-start: 0px;
+    --padding-end: 0px;
+}
+
+.ws-n {
+    white-space: normal;
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-footer{
+      background-color: #000000 !important;
+    }
+  }

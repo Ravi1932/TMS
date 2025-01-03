@@ -1,0 +1,154 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~swiper/swiper-bundle';
+
+@import '~@swimlane/ngx-datatable/themes/bootstrap.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: none !important;
+}
+
+@import "./theme/app.scss";
+@import "./theme/common.scss";
+
+.gm-bundled-control-on-bottom {
+    top: 90px !important;
+}
+
+.ng-option,
+ng-option {
+    white-space: break-spaces !important;
+}
+
+ion-item {
+    .item-native {
+        padding-left: 15px;
+        width: 223px
+    }
+
+}
+
+.input-border {
+    border: none !important;
+
+    &:focus-visible {
+        border: none !important;
+        outline-width: 0;
+    }
+}
+
+.custom-popover {
+    .popover-content {
+        width: 265px !important;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.custom-row-form-array {
+    border: 1px solid;
+    border-radius: 4px;
+    height: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.w-50{
+    width: 50px !important;
+}
+
+ion-radio::part(container) {
+    width: 21px;
+    height: 21px;
+
+    border-radius: 37px;
+    border: 2px solid #ddd;
+}
+
+ion-radio::part(mark) {
+    background: none;
+    transition: none;
+    transform: none;
+    border-radius: 0;
+}
+
+ion-radio.radio-checked::part(container) {
+    background: #00815D;
+    border-color: transparent;
+}
+
+ion-radio.radio-checked::part(mark) {
+    width: 6px;
+    height: 10px;
+
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-color: #fff;
+
+    transform: rotate(45deg);
+}
+
+.invoice_border {
+    border: 1px solid var(--ion-color-primary);
+}
+
+.text_area {
+    padding: 0 !important;
+  }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the arrows in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.inputBorder{
+    border: 1px solid;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 600;
+}

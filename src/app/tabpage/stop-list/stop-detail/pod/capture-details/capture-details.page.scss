@@ -1,0 +1,91 @@
+.cam-image {
+    max-height: 630px;
+    min-height: 50px;
+    overflow-y: scroll;
+    overflow: hidden;
+}
+
+.camimg-view {
+    margin-bottom: 20px;
+    max-height: 230px;
+    min-height: 200px;
+    max-width: 200px;
+    min-width: 150px;
+}
+
+.remove-image {
+    position: absolute;
+    right: 5px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.margin-inline-start {
+    margin-inline-start: auto;
+}
+
+.camera-img{
+    height: 300px;
+}
+
+.sign-view {
+    // position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 155px;
+    background-color: #dce6e9;
+}
+
+.sign-img {
+    width: 200px;
+    height: 150px;
+    // background-color: #ffffff;
+}
+
+.top-51px {
+    top: -12px !important;
+}
+
+.top-117px {
+    top: -3px !important;
+}
+
+.top-180px {
+    top: 180px !important;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.mandatory-btn {
+    position: absolute;
+    color: red;
+    font-size: 30px;
+    // top: 51px;
+    right: -2px;
+}
+
+@media (max-height: 700px) {
+
+    .main {
+        text-align: end;
+        overflow-y: scroll;
+        overflow: hidden;
+    }
+}
+
+.survey {
+    height: 27px;
+    width: 27px;
+}
+
+.pointer-none {
+    pointer-events: none !important;
+    opacity: 0.5; 
+}

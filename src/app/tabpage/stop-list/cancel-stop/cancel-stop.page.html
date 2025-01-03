@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="header-title">{{ cus_name }} - {{ docNo }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="tertiary">
+  <form #cancelstopForm="ngForm" novalidate (ngSubmit)="onSubmit(cancelstopForm)">
+    <ion-row>
+      <ion-col size-xs="12" size-sm="12" size-md="6" *ngIf="displayType == 'rescheduleStop'">
+        <ion-text>
+          <h6 class="mt-3 pb-1">{{'STOP.REASON'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full" class="mt-2">
+          <ion-label [hidden]="reschedstopModel.reason">{{'STOP.SELECT_REASON'| translate}}</ion-label>
+          <ion-select [ngClass]="{'full-width': reschedstopModel.reason}" class="" name="reason" value="brown"
+            okText="Okay" cancelText="Dismiss" [(ngModel)]="reschedstopModel.reason" #reason="ngModel" required>
+            <ion-select-option *ngFor="let item of reschedReasons" [value]="item.IDENT2_0">{{ item.TEXTE_0 }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-text *ngIf="submitted && reason.invalid">
+          <p class="error-msg" *ngIf="reason.invalid && reason.errors.required">
+            {{'STOP.SELECT_REASON_MSG'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+      <ion-col size-md="6" *ngIf="displayType == 'rescheduleStop'">
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.RESCHEDULE_DATE'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full" class="mt-2">
+          <ion-label [hidden]="reschedstopModel.reschedule_date">{{ 'COMMON.SELECT_DATE' | translate }}</ion-label>
+          <ion-datetime style="padding-inline-start:0px" (ionChange)="checkCusVal()" [min]='minDateTime'
+            [max]="maxDateTime" name="date" display-format="DD.MM.YYYY" [(ngModel)]="reschedstopModel.reschedule_date"
+            #rescheduleDate="ngModel" required></ion-datetime>
+        </ion-item>
+        <ion-text *ngIf="submitted && rescheduleDate.invalid">
+          <p class="error-msg" *ngIf="rescheduleDate.invalid && rescheduleDate.errors.required">
+            {{'STOP.SELECT_DATETIME'| translate}}
+          </p>
+        </ion-text>
+        <ion-text *ngIf="!isCustVal">
+          <p class="error-msg">
+            {{'STOP.SELECT_VALID_DATE'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="6" *ngIf="displayType == 'cancelStop'">
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.REASON'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full" class="mt-2">
+          <ion-label [hidden]="cancelstopModel.reason">{{ 'STOP.SELECT_REASON' | translate }}</ion-label>
+          <ion-select [ngClass]="{'full-width': cancelstopModel.reason}" name="reason" value="brown" okText="Okay"
+            cancelText="Dismiss" [(ngModel)]="cancelstopModel.reason" #reason="ngModel" required>
+            <ion-select-option *ngFor="let item of cancelReasons" [value]="item.IDENT2_0">{{ item.TEXTE_0 }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-text *ngIf="submitted && reason.invalid">
+          <p class="error-msg" *ngIf="reason.invalid && reason.errors.required">
+            {{'STOP.SELECT_REASON_MSG'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="6" *ngIf="displayType == 'rescheduleStop'">
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.COMMENT'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full">
+          <ion-textarea name="comment" placeholder="Enter here..." rows="4" [(ngModel)]="reschedstopModel.comment"
+            #comment="ngModel" required></ion-textarea>
+        </ion-item>
+        <ion-text *ngIf="submitted && comment.invalid">
+          <p class="error-msg" *ngIf="comment.invalid && comment.errors.required">
+            {{'STOP.REASON_RESCHEDULE'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="6" *ngIf="displayType == 'cancelStop'">
+        <ion-text>
+          <h6 class="mt-3 pb-1"> {{'STOP.COMMENT'| translate}}</h6>
+        </ion-text>
+        <ion-item lines="full">
+          <ion-textarea name="comment" placeholder="Enter here..." rows="4" [(ngModel)]="cancelstopModel.comment"
+            #comment="ngModel" required></ion-textarea>
+        </ion-item>
+        <ion-text *ngIf="submitted && comment.invalid">
+          <p class="error-msg" *ngIf="comment.invalid && comment.errors.required">
+            {{'STOP.REASON_CANCEL'| translate}}
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-button [disabled]="!isCustVal" type="submit" color="warning" expand="block" shape="round" class="mt-3">
+      {{'STOP.BTN_CONFIRM'| translate}}
+    </ion-button>
+  </form>
+</ion-content>

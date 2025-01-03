@@ -1,0 +1,28 @@
+
+table {
+    width: 100%;
+    border: 1px solid black;
+  }
+  th{
+    background-color: var(--ion-color-primary);
+    color:white;
+  }
+  td,
+  th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+    width: 100px;
+  }
+  .h-100{
+    height: 100px !important;
+  }
+  .w-150{
+    width: 150px;
+  }
+  
+  .company_logo{
+    height: 65px;
+    width: 180px;
+  }

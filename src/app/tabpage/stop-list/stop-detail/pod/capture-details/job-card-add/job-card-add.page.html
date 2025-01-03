@@ -1,0 +1,156 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Add Job</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="goToHome()">
+              <ion-icon name="home-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="mb-20">
+        <ion-card-content>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-text class="text-black fs-16 fw-600">Installed Base</ion-text>
+                </ion-col>
+                <ion-col size="6">
+                    <p>{{installDescription}}</p>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-text class="text-black fs-16 fw-600">Customer</ion-text>
+                </ion-col>
+                <ion-col size="6" *ngIf="customerDetail">
+                    <p>{{ customerDetail.ClinetName }}</p>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-text class="text-black fs-16 fw-600">Technician Name</ion-text>
+                </ion-col>
+                <ion-col size="6" *ngIf="Technician">
+                    <p>{{Technician[0]?.Name}}</p>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-text class="text-black fs-16 fw-600">Service Request</ion-text>
+                </ion-col>
+                <ion-col size="6">
+                    <p>{{ stopId }}</p>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-text class="text-black fs-16 fw-600">Service</ion-text>
+                </ion-col>
+                <ion-col size="6">
+                    <p>{{ description }}</p>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <form [formGroup]="addJobCardForm">
+        <div class="px-3">
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked" class="mt-0">Services Details <ion-text
+                        color="danger">*</ion-text></ion-label>
+                <ion-textarea class="text_area" formControlName="serviceDetail" type="text" [disabled]="addJobCardForm.value.serviceDetail.valid">
+                </ion-textarea>
+                <!-- <div *ngIf="submitted && l['serviceDetail'].errors">
+                    <ion-text class="error-msg" *ngIf="submitted && l['serviceDetail'].errors.required">Mobile number is
+                        required</ion-text>
+                </div> -->
+            </ion-item>
+        </div>
+        <div class="px-3 mt-3">
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked" class="mt-0">Machine Hours <ion-text color="danger">*</ion-text></ion-label>
+                <ion-input type="number" formControlName="time"  
+                class="input-border" (ionInput)="onInputChange($event)"></ion-input>
+                <!-- <input type="number" class="input-border"  maxlength="3" formControlName="time"  > -->
+            </ion-item>
+        </div>
+        <ion-text *ngIf="showError" class="error-msg ml-15">
+            Machine Hours max  7 digits
+        </ion-text> 
+    </form>
+    <ng-container>
+        <ion-card>
+            <ion-card-content>
+                <h5 class="pl-1 fs-20 fw-900">Job Timer</h5>
+                <ion-col size="12" class="pt-1 mb-20">
+                    <div class="timer mt-0">{{ formattedTime }}</div>
+                </ion-col>
+                <ion-col size="12" *ngIf="!isRunning">
+                    <ion-button expand="block" (click)="startTimer()" [disabled]="isRunning || timeForm.value.jobtime !== ''">CLOCK-IN</ion-button>
+                </ion-col>
+                <ion-row>
+                    <ion-col size="6" class="pt-1" *ngIf="isRunning">
+                        <ion-button expand="block" (click)="pauseResumeTimer()"
+                            [disabled]="!isRunning">PAUSE/RESUME</ion-button>
+                    </ion-col>
+                    <ion-col size="6" class="pt-1" *ngIf="isRunning">
+                        <ion-button expand="block" (click)="stopTimer()" [disabled]="!isRunning">CLOCK-OUT</ion-button>
+                    </ion-col>
+                </ion-row>
+                <div>
+                    <form [formGroup]="timeForm">
+                        <ion-row>
+                            <ion-col size="8">
+                                <ion-item class="ion-no-padding ion-margin-top">
+                                    <input type="text" id="time" name="time" formControlName="jobtime" mask="00:00:00"
+                                        class="input-border" placeholder="HH:MM:SS"  (blur)="validateAndFormatTime($event)">
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-button type="submit" expand="block" (click)="submitForm()"
+                                    [disabled]="!addJobCardForm.valid || isBtnDisable || isConfirm || showError">CONFIRM</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                </div>
+            </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="!jobDetailList">
+            <ion-card-content class="p-2">
+                <ion-row>
+                    <ion-col size="6">
+                        <ion-text class="fs-14 fw-900">Clock-In Date-Time</ion-text>
+                        <div class="d-flex">
+                            <ion-text>{{ startDate }}</ion-text>
+                            <ion-text class="ml-2">{{ start }}</ion-text>
+                        </div>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-text class="fs-14 fw-900">Clock-Out Date-Time</ion-text>
+                        <div class="d-flex">
+                            <ion-text>{{ endDate }}</ion-text>
+                            <ion-text class="ml-2">{{ end }}</ion-text>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="jobDetailList">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-text class="fs-14 fw-900">Clock-In Date-Time</ion-text>
+                    <div class="d-flex">
+                        <ion-text>{{ jobDetailList?.startDate | date:'MM-dd-YYYY' }}</ion-text>
+                        <ion-text class="ml-2">{{ jobDetailList?.StartTime }}</ion-text>
+                    </div>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-text class="fs-14 fw-900">Clock-Out Date-Time</ion-text>
+                    <div class="d-flex">
+                        <ion-text>{{ jobDetailList?.EndDate | date:'MM-dd-YYYY' }}</ion-text>
+                        <ion-text class="ml-2">{{ jobDetailList?.EndTIME }}</ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ng-container>
+</ion-content>
+<!-- <ion-footer class="ion-padding">
+    <ion-button expand="block" [disabled]="!addJobCardForm.valid" (click)="submitForm()">Submit</ion-button>
+</ion-footer> -->

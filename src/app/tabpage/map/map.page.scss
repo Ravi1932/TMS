@@ -1,0 +1,24 @@
+.google-map {
+  position: relative;
+}
+
+.map-slides {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: calc(100%);
+
+  .ion-slides {
+    .swiper-slide.swiper-slide-active {
+      ion-card {
+        border-style: solid;
+        border-color: var(--ion-color-primary);
+      }
+    }
+
+    .slide-card {
+      width: 80%;
+      height: 20%;
+    }
+  }
+}

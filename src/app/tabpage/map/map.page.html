@@ -1,0 +1,14 @@
+<ion-content>
+  <div id="map_canvas" class="google-map h-100"></div>
+  <div class="map-slides">
+    <ion-slides class="ion-slides" [options]="swiperParams" (ionSlideDidChange)="sliderChanges($event)">
+      <ion-slide *ngFor="let sd of stops">
+        <ion-card class="slide-card">
+          <ion-card-header>
+            <ion-card-subtitle>{{ sd.XBPNAME_0 }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
